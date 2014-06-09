@@ -5,7 +5,7 @@ A promise-wrapped helper lib for yielding Sift Science API calls
 
 ### Installation
 
-Using [npm](https://npmjs.org):
+**Using [npm](https://npmjs.org):**
 
 ```bash
 $ npm install otothea/yield-siftscience
@@ -13,11 +13,12 @@ $ npm install otothea/yield-siftscience
 
 ### Usage
 
+**Require:**
 ```js
 var siftscience = require('yield-siftscience')('YOUR_SIFT_SCIENCE_API_KEY');
 ```
 
-Send Event:
+**Send Event:**
 ```js
 var result = yield siftscience.event.create_account({
   '$session_id': 'abcdefghijklmnopqrstuvwxyz',
@@ -27,7 +28,7 @@ var result = yield siftscience.event.create_account({
 console.log(result);
 ```
 
-Send Label:
+**Send Label:**
 ```js
 var result = yield siftscience.label('user_id', {
   '$is_bad': true,
@@ -36,7 +37,7 @@ var result = yield siftscience.label('user_id', {
 });
 ```
 
-Get Score:
+**Get Score:**
 ```js
 var score = yield siftscience.score('user_id');
 console.log(score);
