@@ -35,6 +35,7 @@ var result = yield siftscience.label('user_id', {
   '$reasons': [ '$spam', '$chargeback' ],
   '$description': 'Because they are spamming and abusing our system'
 });
+console.log(result);
 ```
 
 **Get Score:**
