@@ -1,7 +1,7 @@
-Promise-wrapped Sift Science lib for yielding
+# Promise-wrapped Sift Science lib for yielding
 ===
 
-## Installation
+### Installation
 
 Using [npm](https://npmjs.org):
 
@@ -9,12 +9,12 @@ Using [npm](https://npmjs.org):
 $ npm install otothea/yield-siftscience
 ```
 
-## Usage
+### Usage
 
 ```js
 var siftscience = require('yield-siftscience')('YOUR_SIFT_SCIENCE_API_KEY');
 ```
 
-## Sift Science Documentation
+### Sift Science Documentation
 
 [siftscience.com](https://siftscience.com/docs)
