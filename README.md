@@ -1,4 +1,4 @@
-Helper Lib for Yielding Sift Science API Calls
+Promise-wrapped Sift Science lib for yielding
 ===
 
 ## Installation
