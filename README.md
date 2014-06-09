@@ -46,4 +46,4 @@ console.log(score);
 
 ### Sift Science Documentation
 
-[siftscience.com](https://siftscience.com/docs)
+[siftscience.com/docs](https://siftscience.com/docs)
