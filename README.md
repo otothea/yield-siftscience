@@ -8,7 +8,7 @@ A promise-wrapped helper lib for yielding Sift Science API calls
 **Using [npm](https://npmjs.org):**
 
 ```bash
-$ npm install otothea/yield-siftscience
+$ npm install yield-siftscience
 ```
 
 ### Usage
