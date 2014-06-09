@@ -1,5 +1,7 @@
-# Promise-wrapped Sift Science lib for yielding
+Yield Sift Science
 ===
+
+A promise-wrapped helper lib for yielding Sift Science API calls
 
 ### Installation
 
