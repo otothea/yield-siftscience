@@ -1,14 +1,17 @@
 {
   "name": "yield-siftscience",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "Promise-wrapped Sift Science lib for yielding",
   "author": "Oscar Armstrong <oscar@otothea.com> (https://github.com/otothea)",
   "homepage": "https://otothea.com",
   "keywords": [
-    "anti-fraud",
+    "fraud",
     "prevention",
     "sift",
-    "science"
+    "science",
+    "yield",
+    "koa",
+    "promise"
   ],
   "repository": {
     "type": "git",
