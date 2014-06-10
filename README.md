@@ -33,7 +33,7 @@ var score = yield siftscience.custom_event('submit_comment', {
   '$session_id': 'abcdefghijklmnopqrstuvwxyz',
   '$user_id': '12345',
   '$user_email': 'example@email.com',
-  '$content': 'blah blah blah comment'
+  'content': 'blah blah blah comment'
 });
 console.log(score);
 ```
@@ -52,7 +52,7 @@ var result = yield siftscience.event.submit_comment({
   '$session_id': 'abcdefghijklmnopqrstuvwxyz',
   '$user_id': '12345',
   '$user_email': 'example@email.com',
-  '$content': 'blah blah blah comment'
+  'content': 'blah blah blah comment'
 });
 console.log(result);
 ```
