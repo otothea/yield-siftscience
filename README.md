@@ -73,7 +73,7 @@ var score = yield siftscience.score('user_id');
 console.log(score);
 ```
 
-**Don't know what yielding or promising is? Do it regular async:**
+**Don't know what yielding or promising is? Do it with a regular callback:**
 ```js
 var callback = function(_err, _response) {
   if (_err) {
@@ -87,7 +87,7 @@ var callback = function(_err, _response) {
 siftscience.score('user_id', callback);
 ```
 
-**You can also inject a global callback for all requests**
+**You can also inject a global callback for all requests:**
 ```js
 var global_callback = function(_err, _response) {
   if (_err) {
