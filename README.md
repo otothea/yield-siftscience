@@ -3,6 +3,8 @@ Yield Sift Science
 
 A promise-wrapped helper lib for yielding Sift Science API calls.
 
+Also supports regular callback functions.
+
 ## Installation
 
 **Using [npm](https://npmjs.org):**
