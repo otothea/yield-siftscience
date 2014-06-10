@@ -73,6 +73,20 @@ var score = yield siftscience.score('user_id');
 console.log(score);
 ```
 
+**Don't know what yielding or promising if? Do it async:**
+```js
+var callback = function (_err, _response) {
+  if (_err) {
+    console.log(_err);
+  }
+  else {
+    var score = _response.body;
+    console.log(score);
+  }
+};
+siftscience.score('user_id', callback);
+```
+
 ### Sift Science Documentation
 
 [siftscience.com/docs](https://siftscience.com/docs)
