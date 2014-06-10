@@ -98,8 +98,8 @@ var global_callback = function(_err, _response) {
     console.log(_err);
   }
   else {
-    var score = _response.body;
-    console.log(score);
+    var result = _response.body;
+    console.log(result);
   }
 };
 var siftscience = require('yield-siftscience')('YOUR_SIFT_SCIENCE_REST_API_KEY', null, null, global_callback);
