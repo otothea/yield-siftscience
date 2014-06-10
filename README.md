@@ -3,7 +3,7 @@ Yield Sift Science
 
 A promise-wrapped helper lib for yielding Sift Science API calls.
 
-Also supports regular callback functions.
+Also supports regular [callbacks](https://github.com/otothea/yield-siftscience#callbacks).
 
 ## Installation
 
