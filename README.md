@@ -75,7 +75,7 @@ console.log(score);
 
 **Don't know what yielding or promising is? Do it regular async:**
 ```js
-var callback = function (_err, _response) {
+var callback = function(_err, _response) {
   if (_err) {
     console.log(_err);
   }
@@ -89,7 +89,7 @@ siftscience.score('user_id', callback);
 
 **You can also inject a global callback for all requests**
 ```js
-var global_callback = function (_err, _response) {
+var global_callback = function(_err, _response) {
   if (_err) {
     console.log(_err);
   }
@@ -98,7 +98,7 @@ var global_callback = function (_err, _response) {
     console.log(score);
   }
 };
-var siftscience = require('yield-siftscience')('YOUR_SIFT_SCIENCE_REST_API_KEY', null, null);
+var siftscience = require('yield-siftscience')('YOUR_SIFT_SCIENCE_REST_API_KEY', null, null, global_callback);
 ```
 
 ### Sift Science Documentation
