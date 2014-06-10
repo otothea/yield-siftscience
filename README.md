@@ -43,6 +43,34 @@ var score = yield siftscience.score('user_id');
 console.log(score);
 ```
 
+**Generic Custom Event:**
+```js
+var score = yield siftscience.custom_event('submit_comment', {
+  '$session_id': 'abcdefghijklmnopqrstuvwxyz',
+  '$user_id': '12345',
+  '$user_email': 'example@email.com',
+  '$content': 'blah blah blah comment'
+});
+console.log(score);
+```
+
+**Custom Events:**
+Optionally, you can pass in an array of custom event names to add to the lib
+```js
+var custom_events = ['reported_by_user', 'submit_comment'];
+var siftscience = require('yield-siftscience')('YOUR_SIFT_SCIENCE_REST_API_KEY', null, custom_events);
+```
+Then you could use
+```js
+var result = yield siftscience.event.submit_comment({
+  '$session_id': 'abcdefghijklmnopqrstuvwxyz',
+  '$user_id': '12345',
+  '$user_email': 'example@email.com',
+  '$content': 'blah blah blah comment'
+});
+console.log(result);
+```
+
 ### Sift Science Documentation
 
 [siftscience.com/docs](https://siftscience.com/docs)
