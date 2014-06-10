@@ -6,16 +6,15 @@ A promise-wrapped helper lib for yielding Sift Science API calls
 ### Installation
 
 **Using [npm](https://npmjs.org):**
-
 ```bash
 $ npm install yield-siftscience
 ```
 
 ### Usage
 
-**Require:**
+**Require with [API Keys](https://siftscience.com/console/api-keys):**
 ```js
-var siftscience = require('yield-siftscience')('YOUR_SIFT_SCIENCE_API_KEY');
+var siftscience = require('yield-siftscience')('YOUR_SIFT_SCIENCE_REST_API_KEY');
 ```
 
 **Send Event:**
