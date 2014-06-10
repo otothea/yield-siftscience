@@ -101,6 +101,10 @@ var global_callback = function(_err, _response) {
 var siftscience = require('yield-siftscience')('YOUR_SIFT_SCIENCE_REST_API_KEY', null, null, global_callback);
 ```
 
+### More Documentation
+
+[yield-siftscience/lib/app.js](https://github.com/otothea/yield-siftscience/blob/master/lib/app.js)
+
 ### Sift Science Documentation
 
 [siftscience.com/docs](https://siftscience.com/docs)
