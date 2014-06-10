@@ -75,6 +75,8 @@ var score = yield siftscience.score('user_id');
 console.log(score);
 ```
 
+## Callbacks
+
 **Don't know what yielding or promising is? Do it with a regular callback:**
 ```js
 var callback = function(_err, _response) {
