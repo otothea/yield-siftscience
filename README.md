@@ -3,14 +3,14 @@ Yield Sift Science
 
 A promise-wrapped helper lib for yielding Sift Science API calls.
 
-### Installation
+## Installation
 
 **Using [npm](https://npmjs.org):**
 ```bash
 $ npm install yield-siftscience
 ```
 
-### Usage
+## Usage
 
 **Require with [API key](https://siftscience.com/console/api-keys):**
 ```js
@@ -101,10 +101,10 @@ var global_callback = function(_err, _response) {
 var siftscience = require('yield-siftscience')('YOUR_SIFT_SCIENCE_REST_API_KEY', null, null, global_callback);
 ```
 
-### More Documentation
+## More Documentation
 
 [yield-siftscience/lib/app.js](https://github.com/otothea/yield-siftscience/blob/master/lib/app.js)
 
-### Sift Science Documentation
+## Sift Science Documentation
 
 [siftscience.com/docs](https://siftscience.com/docs)
