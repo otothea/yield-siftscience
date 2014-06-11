@@ -21,23 +21,36 @@ var siftscience = require('yield-siftscience')('YOUR_SIFT_SCIENCE_REST_API_KEY')
 
 ####Send Event:
 ```js
-var result = yield siftscience.event.create_account({
+var create_account = yield siftscience.event.create_account({
   '$session_id': 'abcdefghijklmnopqrstuvwxyz',
   '$user_id': '12345',
   '$user_email': 'example@email.com'
 });
-console.log(result);
+console.log(create_account);
+
+var login = yield siftscience.event.login({
+  '$session_id': 'abcdefghijklmnopqrstuvwxyz',
+  '$user_id': '12345',
+  '$login_status': '$success'
+});
+console.log(login);
 ```
 
 ####Send Generic Custom Event:
 ```js
-var score = yield siftscience.custom_event('submit_comment', {
+var submit_comment = yield siftscience.event.custom_event('submit_comment', {
   '$session_id': 'abcdefghijklmnopqrstuvwxyz',
   '$user_id': '12345',
   '$user_email': 'example@email.com',
   'content': 'blah blah blah comment'
 });
-console.log(score);
+console.log(submit_comment);
+
+var delete_account = yield siftscience.event.custom_event('delete_account', {
+  '$session_id': 'abcdefghijklmnopqrstuvwxyz',
+  '$user_id': '12345'
+});
+console.log(delete_account);
 ```
 
 ####Inject Custom Events:
@@ -45,18 +58,26 @@ console.log(score);
 Optionally, you can pass in an array of custom event names to add to the lib
 
 ```js
-var custom_events = ['submit_comment', ...];
+var custom_events = ['submit_comment', 'delete_account', ...];
 var siftscience = require('yield-siftscience')('YOUR_SIFT_SCIENCE_REST_API_KEY', null, custom_events);
 ```
+
 Then you could use
+
 ```js
-var result = yield siftscience.event.submit_comment({
+var submit_comment = yield siftscience.event.submit_comment({
   '$session_id': 'abcdefghijklmnopqrstuvwxyz',
   '$user_id': '12345',
   '$user_email': 'example@email.com',
   'content': 'blah blah blah comment'
 });
-console.log(result);
+console.log(submit_comment);
+
+var delete_account = yield siftscience.event.delete_account({
+  '$session_id': 'abcdefghijklmnopqrstuvwxyz',
+  '$user_id': '12345',
+});
+console.log(delete_account);
 ```
 
 ####Send Label:
