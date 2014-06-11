@@ -7,19 +7,19 @@ Also supports regular [callbacks](https://github.com/otothea/yield-siftscience#c
 
 ## Installation
 
-**Using [npm](https://npmjs.org):**
+####Using [npm](https://npmjs.org):
 ```bash
 $ npm install yield-siftscience
 ```
 
 ## Usage
 
-**Require with [API key](https://siftscience.com/console/api-keys):**
+####Require with [API key](https://siftscience.com/console/api-keys):
 ```js
 var siftscience = require('yield-siftscience')('YOUR_SIFT_SCIENCE_REST_API_KEY');
 ```
 
-**Send Event:**
+####Send Event:
 ```js
 var result = yield siftscience.event.create_account({
   '$session_id': 'abcdefghijklmnopqrstuvwxyz',
@@ -29,7 +29,7 @@ var result = yield siftscience.event.create_account({
 console.log(result);
 ```
 
-**Send Generic Custom Event:**
+####Send Generic Custom Event:
 ```js
 var score = yield siftscience.custom_event('submit_comment', {
   '$session_id': 'abcdefghijklmnopqrstuvwxyz',
@@ -40,7 +40,7 @@ var score = yield siftscience.custom_event('submit_comment', {
 console.log(score);
 ```
 
-**Inject Custom Events:**
+####Inject Custom Events:
 
 Optionally, you can pass in an array of custom event names to add to the lib
 
@@ -59,7 +59,7 @@ var result = yield siftscience.event.submit_comment({
 console.log(result);
 ```
 
-**Send Label:**
+####Send Label:
 ```js
 var result = yield siftscience.label('user_id', {
   '$is_bad': true,
@@ -69,7 +69,7 @@ var result = yield siftscience.label('user_id', {
 console.log(result);
 ```
 
-**Get Score:**
+####Get Score:
 ```js
 var score = yield siftscience.score('user_id');
 console.log(score);
@@ -77,7 +77,7 @@ console.log(score);
 
 ## Callbacks
 
-**Don't know what yielding or promising is? Do it with a regular callback:**
+####Don't know what yielding or promising is? Do it with a regular callback:
 ```js
 var callback = function(_err, _response) {
   if (_err) {
@@ -91,7 +91,7 @@ var callback = function(_err, _response) {
 siftscience.score('user_id', callback);
 ```
 
-**You can also inject a global callback for all requests:**
+####You can also inject a global callback for all requests:
 ```js
 var global_callback = function(_err, _response) {
   if (_err) {
