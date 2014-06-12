@@ -16,7 +16,11 @@ $ npm install yield-siftscience
 
 ####Require with [API key](https://siftscience.com/console/api-keys):
 ```js
+// Default version
 var siftscience = require('yield-siftscience')('YOUR_SIFT_SCIENCE_REST_API_KEY');
+
+// For a specific siftscience API version
+var siftscience = require('yield-siftscience')('YOUR_SIFT_SCIENCE_REST_API_KEY', 'v203');
 ```
 
 ####Send Event:
