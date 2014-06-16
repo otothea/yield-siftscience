@@ -1,7 +1,7 @@
-Yield Sift Science
+Yield Sift Science - NodeJS
 ===
 
-A promise-wrapped helper lib for yielding Sift Science API calls.
+A promise-wrapped helper lib for yielding Sift Science API calls in nodejs.
 
 Also supports regular [callbacks](#callbacks).
 
