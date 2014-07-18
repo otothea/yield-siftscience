@@ -25,14 +25,14 @@ var siftscience = require('yield-siftscience')('YOUR_SIFT_SCIENCE_REST_API_KEY',
 
 ####Send Event:
 ```js
-var create_account = yield siftscience.event.create_account({
+create_account = yield siftscience.event.create_account({
   '$session_id': 'abcdefghijklmnopqrstuvwxyz',
   '$user_id': '12345',
   '$user_email': 'example@email.com'
 });
 console.log(create_account);
 
-var login = yield siftscience.event.login({
+login = yield siftscience.event.login({
   '$session_id': 'abcdefghijklmnopqrstuvwxyz',
   '$user_id': '12345',
   '$login_status': '$success'
@@ -42,7 +42,7 @@ console.log(login);
 
 ####Send Generic Custom Event:
 ```js
-var submit_comment = yield siftscience.event.custom_event('submit_comment', {
+submit_comment = yield siftscience.event.custom_event('submit_comment', {
   '$session_id': 'abcdefghijklmnopqrstuvwxyz',
   '$user_id': '12345',
   '$user_email': 'example@email.com',
@@ -50,7 +50,7 @@ var submit_comment = yield siftscience.event.custom_event('submit_comment', {
 });
 console.log(submit_comment);
 
-var delete_account = yield siftscience.event.custom_event('delete_account', {
+delete_account = yield siftscience.event.custom_event('delete_account', {
   '$session_id': 'abcdefghijklmnopqrstuvwxyz',
   '$user_id': '12345'
 });
@@ -69,7 +69,7 @@ var siftscience = require('yield-siftscience')('YOUR_SIFT_SCIENCE_REST_API_KEY',
 Then you could use
 
 ```js
-var submit_comment = yield siftscience.event.submit_comment({
+submit_comment = yield siftscience.event.submit_comment({
   '$session_id': 'abcdefghijklmnopqrstuvwxyz',
   '$user_id': '12345',
   '$user_email': 'example@email.com',
@@ -77,7 +77,7 @@ var submit_comment = yield siftscience.event.submit_comment({
 });
 console.log(submit_comment);
 
-var delete_account = yield siftscience.event.delete_account({
+delete_account = yield siftscience.event.delete_account({
   '$session_id': 'abcdefghijklmnopqrstuvwxyz',
   '$user_id': '12345',
 });
@@ -86,7 +86,7 @@ console.log(delete_account);
 
 ####Send Label:
 ```js
-var result = yield siftscience.label('user_id', {
+result = yield siftscience.label('user_id', {
   '$is_bad': true,
   '$reasons': [ '$spam', '$chargeback' ],
   '$description': 'Because they are spamming and abusing our system'
@@ -96,7 +96,7 @@ console.log(result);
 
 ####Get Score:
 ```js
-var score = yield siftscience.score('user_id');
+score = yield siftscience.score('user_id');
 console.log(score);
 ```
 
