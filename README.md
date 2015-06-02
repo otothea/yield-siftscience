@@ -7,14 +7,14 @@ Also supports regular [callbacks](#callbacks).
 
 ## Installation
 
-####Using [npm](https://npmjs.org):
+#### Using [npm](https://npmjs.org):
 ```bash
 $ npm install yield-siftscience
 ```
 
 ## Usage
 
-####Require with [API key](https://siftscience.com/console/api-keys):
+#### Require with [API key](https://siftscience.com/console/api-keys):
 ```js
 // Default version
 var siftscience = require('yield-siftscience')('YOUR_SIFT_SCIENCE_REST_API_KEY');
@@ -23,16 +23,16 @@ var siftscience = require('yield-siftscience')('YOUR_SIFT_SCIENCE_REST_API_KEY')
 var siftscience = require('yield-siftscience')('YOUR_SIFT_SCIENCE_REST_API_KEY', 'v203');
 ```
 
-####Send Event:
+#### Send Event:
 ```js
-create_account = yield siftscience.event.create_account({
+var create_account = yield siftscience.event.create_account({
   '$session_id': 'abcdefghijklmnopqrstuvwxyz',
   '$user_id': '12345',
   '$user_email': 'example@email.com'
 });
 console.log(create_account);
 
-login = yield siftscience.event.login({
+var login = yield siftscience.event.login({
   '$session_id': 'abcdefghijklmnopqrstuvwxyz',
   '$user_id': '12345',
   '$login_status': '$success'
@@ -40,9 +40,9 @@ login = yield siftscience.event.login({
 console.log(login);
 ```
 
-####Send Generic Custom Event:
+#### Send Generic Custom Event:
 ```js
-submit_comment = yield siftscience.event.custom_event('submit_comment', {
+var submit_comment = yield siftscience.event.custom_event('submit_comment', {
   '$session_id': 'abcdefghijklmnopqrstuvwxyz',
   '$user_id': '12345',
   '$user_email': 'example@email.com',
@@ -50,14 +50,14 @@ submit_comment = yield siftscience.event.custom_event('submit_comment', {
 });
 console.log(submit_comment);
 
-delete_account = yield siftscience.event.custom_event('delete_account', {
+var delete_account = yield siftscience.event.custom_event('delete_account', {
   '$session_id': 'abcdefghijklmnopqrstuvwxyz',
   '$user_id': '12345'
 });
 console.log(delete_account);
 ```
 
-####Inject Custom Events:
+#### Inject Custom Events:
 
 Optionally, you can pass in an array of custom event names to add to the lib
 
@@ -69,7 +69,7 @@ var siftscience = require('yield-siftscience')('YOUR_SIFT_SCIENCE_REST_API_KEY',
 Then you could use
 
 ```js
-submit_comment = yield siftscience.event.submit_comment({
+var submit_comment = yield siftscience.event.submit_comment({
   '$session_id': 'abcdefghijklmnopqrstuvwxyz',
   '$user_id': '12345',
   '$user_email': 'example@email.com',
@@ -77,16 +77,16 @@ submit_comment = yield siftscience.event.submit_comment({
 });
 console.log(submit_comment);
 
-delete_account = yield siftscience.event.delete_account({
+var delete_account = yield siftscience.event.delete_account({
   '$session_id': 'abcdefghijklmnopqrstuvwxyz',
   '$user_id': '12345',
 });
 console.log(delete_account);
 ```
 
-####Send Label:
+#### Send Label:
 ```js
-result = yield siftscience.label('user_id', {
+var result = yield siftscience.label('user_id', {
   '$is_bad': true,
   '$reasons': [ '$spam', '$chargeback' ],
   '$description': 'Because they are spamming and abusing our system'
@@ -94,15 +94,21 @@ result = yield siftscience.label('user_id', {
 console.log(result);
 ```
 
-####Get Score:
+#### Remove Label:
 ```js
-score = yield siftscience.score('user_id');
+var result = yield siftscience.unlabel('user_id');
+console.log(result);
+```
+
+#### Get Score:
+```js
+var score = yield siftscience.score('user_id');
 console.log(score);
 ```
 
 ## Callbacks
 
-####Don't know what yielding or promising is? Do it with a regular callback:
+#### Don't know what yielding or promising is? Do it with a regular callback:
 ```js
 var callback = function(_err, _response) {
   if (_err) {
@@ -116,7 +122,7 @@ var callback = function(_err, _response) {
 siftscience.score('user_id', callback);
 ```
 
-####You can also inject a global callback for all requests:
+#### You can also inject a global callback for all requests:
 ```js
 var global_callback = function(_err, _response) {
   if (_err) {
