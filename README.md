@@ -381,6 +381,14 @@ module.exports = {
 };
 ```
 
+#### Install npm dependencies:
+
+```bash
+$ cd test
+$ npm install
+$ cd ..
+```
+
 #### Run the test:
 
 ```bash
