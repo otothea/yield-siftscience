@@ -14,7 +14,7 @@ $ npm install yield-siftscience
 
 ## USAGE
 
-#### Require with [API key](https://siftscience.com/console/developer/api-keys):
+#### Require with [API Key](https://siftscience.com/console/developer/api-keys):
 
 Default API version
 ```js
@@ -32,12 +32,12 @@ var siftscience = require('yield-siftscience')({
 ```
 
 #### Available options:
-  - api_key:         'XXXXXXXXXXXX',                    // required  (get your keys: https://siftscience.com/console/developer/api-keys)
-  - account_id:      'XXXXXXXXXXXX',                    // optional* (required for fingerprint api, get your account id: https://siftscience.com/console/account/profile)
-  - version:         'xXXX',                            // optional  (default: 'v203')
-  - custom_events:   ['xxxx_xxxx'],                     // optional  (ex: ['submit_comment', 'delete_account', ...])
-  - global_callback: function(_err, _response) { ... }, // optional  (can be used to override promise and make regular callback on all requests)
-  - return_action:   true                               // optional  (default: false - can be used to get extra params from sift science responses although it is undocumented)
+  - **api_key:** *required* [get your api key](https://siftscience.com/console/developer/api-keys)
+  - **account_id:** *optional* (required for [device fingerprinting api](#device-fingerprinting-api), [get your account id](https://siftscience.com/console/account/profile))
+  - **version:** *optional*  (default: 'v203')
+  - **custom_events:** *optional*  (ex: ['submit_comment', 'delete_account', ...])
+  - **global_callback:** *optional* (ex: function(err, response) { ... } - can be used to override promise and make regular callback on all requests)
+  - **return_action:** *optional* (default: false - can be used to get extra params from sift science responses although it is undocumented)
 
 ## EVENTS API
 
@@ -45,13 +45,13 @@ var siftscience = require('yield-siftscience')({
 ```js
 var create_account = yield siftscience.event.create_account({
   '$session_id': session.id,
-  '$user_id': user.id,
+  '$user_id':    user.id,
   '$user_email': user.email
 });
 
 var login = yield siftscience.event.login({
-  '$session_id': session.id,
-  '$user_id': user.id,
+  '$session_id':   session.id,
+  '$user_id':      user.id,
   '$login_status': siftscience.CONSTANTS.LOGIN_STATUS.SUCCESS
 });
 ```
@@ -60,14 +60,14 @@ var login = yield siftscience.event.login({
 ```js
 var submit_comment = yield siftscience.event.custom_event('submit_comment', {
   '$session_id': session.id,
-  '$user_id': user.id,
+  '$user_id':    user.id,
   '$user_email': user.email,
-  'content': 'blah blah blah comment'
+  'content':     'blah blah blah comment'
 });
 
 var delete_account = yield siftscience.event.custom_event('delete_account', {
   '$session_id': session.id,
-  '$user_id': user.id
+  '$user_id':    user.id
 });
 ```
 
@@ -87,14 +87,14 @@ Then you could use
 ```js
 var submit_comment = yield siftscience.event.submit_comment({
   '$session_id': session.id,
-  '$user_id': user.id,
+  '$user_id':    user.id,
   '$user_email': user.email,
-  'content': 'blah blah blah comment'
+  'content':     'blah blah blah comment'
 });
 
 var delete_account = yield siftscience.event.delete_account({
   '$session_id': session.id,
-  '$user_id': user.id,
+  '$user_id':    user.id,
 });
 ```
 
@@ -103,8 +103,8 @@ var delete_account = yield siftscience.event.delete_account({
 #### Send Label:
 ```js
 var result = yield siftscience.label(user.id, {
-  '$is_bad': true,
-  '$reasons': [ siftscience.CONSTANTS.REASON.SPAM, siftscience.CONSTANTS.REASON.CHARGEBACK ],
+  '$is_bad':      true,
+  '$reasons':     [siftscience.CONSTANTS.REASON.SPAM, siftscience.CONSTANTS.REASON.CHARGEBACK],
   '$description': 'Because they are spamming and abusing our system'
 });
 ```
@@ -125,33 +125,33 @@ var score = yield siftscience.score(user.id);
 
 #### JavaScript Snippet:
 
-Add this snippet to your html pages. Replace `'UNIQUE_SESSION_ID'`, `'UNIQUE_USER_ID'`, and `'INSERT_JS_SNIPPET_KEY_HERE'` to proper values
+Add this snippet to your html pages. Replace `'UNIQUE_SESSION_ID'`, `'UNIQUE_USER_ID'`, and `'INSERT_JS_SNIPPET_KEY_HERE'` with proper values
 
 ```js
 <script type="text/javascript">
-var _session_id = 'UNIQUE_SESSION_ID'; // IMPORTANT! Set to a unique session ID for the visitor's current browsing session.
-var _user_id = 'UNIQUE_USER_ID';       // IMPORTANT! Set to the user's unique ID, username, or email address if known when the snippet loads
+  var _session_id = 'UNIQUE_SESSION_ID';
+  var _user_id = 'UNIQUE_USER_ID';
 
-var _sift = _sift || [];
-_sift.push(['_setAccount', 'INSERT_JS_SNIPPET_KEY_HERE']);
-_sift.push(['_setSessionId', _session_id]);
-_sift.push(['_setUserId', _user_id]);
-_sift.push(['_trackPageview']);
-(function() {
-  function ls() {
-    var e = document.createElement('script');
-    e.type = 'text/javascript';
-    e.async = true;
-    e.src = ('https:' == document.location.protocol ? 'https://' : 'http://') + 'cdn.siftscience.com/s.js';
-    var s = document.getElementsByTagName('script')[0];
-    s.parentNode.insertBefore(e, s);
-  }
-  if (window.attachEvent) {
-    window.attachEvent('onload', ls);
-  } else {
-    window.addEventListener('load', ls, false);
-  }
-})();
+  var _sift = _sift || [];
+  _sift.push(['_setAccount', 'INSERT_JS_SNIPPET_KEY_HERE']);
+  _sift.push(['_setSessionId', _session_id]);
+  _sift.push(['_setUserId', _user_id]);
+  _sift.push(['_trackPageview']);
+  (function() {
+    function ls() {
+      var e = document.createElement('script');
+      e.type = 'text/javascript';
+      e.async = true;
+      e.src = ('https:' == document.location.protocol ? 'https://' : 'http://') + 'cdn.siftscience.com/s.js';
+      var s = document.getElementsByTagName('script')[0];
+      s.parentNode.insertBefore(e, s);
+    }
+    if (window.attachEvent) {
+      window.attachEvent('onload', ls);
+    } else {
+      window.addEventListener('load', ls, false);
+    }
+  })();
 </script>
 ```
 
@@ -208,7 +208,7 @@ siftscience.score(user.id, function(_err, _response) {
 #### You can also inject a global callback for all requests:
 ```js
 var siftscience = require('yield-siftscience')({
-  api_key: 'YOUR_SIFT_SCIENCE_REST_API_KEY',
+  api_key:         'YOUR_SIFT_SCIENCE_REST_API_KEY',
   global_callback: function(_err, _response) {
     if (_err) {
       console.log(_err);
@@ -316,6 +316,30 @@ Please look at the code [yield-siftscience/lib/app.js](https://github.com/otothe
 ## SIFT SCIENCE DOCUMENTATION
 
 [siftscience.com/docs](https://siftscience.com/docs)
+
+## TESTING
+
+#### Copy the example config:
+
+```bash
+$ cp test/config-example.js test/config.js
+$ nano test/config.js
+```
+
+#### Set your **sandbox** [api key](https://siftscience.com/console/developer/api-keys) and [account id](https://siftscience.com/console/account/profile)
+
+```js
+module.exports = {
+  api_key:    'xxxxxxxxxxxxxxxx',
+  account_id: 'xxxxxxxxxxxxxxxxxxxxxxxx'
+};
+```
+
+#### Run the test requests
+
+```bash
+$ npm test
+```
 
 ## CHANGE LOG
 
