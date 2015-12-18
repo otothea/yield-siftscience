@@ -7,6 +7,10 @@ var siftscience = require('../lib/app.js')({
   return_action: true
 });
 
+//
+// Start up the test server for page views
+//
+
 var app = express();
 
 app.get('/', function (req, res) {

@@ -59,13 +59,13 @@ var siftscience = require('yield-siftscience')({
 #### Send Event:
 
 ```js
-var create_account = yield siftscience.event.create_account({
+var result = yield siftscience.event.create_account({
   '$session_id': session.id,
   '$user_id':    user.id,
   '$user_email': user.email
 });
 
-var login = yield siftscience.event.login({
+var result = yield siftscience.event.login({
   '$session_id':   session.id,
   '$user_id':      user.id,
   '$login_status': siftscience.CONSTANTS.STATUS.SUCCESS
@@ -75,13 +75,13 @@ var login = yield siftscience.event.login({
 #### Send Generic Custom Event:
 
 ```js
-var referral_code_redeemed = yield siftscience.event.custom_event('referral_code_redeemed', {
+var result = yield siftscience.event.custom_event('referral_code_redeemed', {
   '$session_id': session.id,
   '$user_id':    user.id,
   'code':        'abc123'
 });
 
-var contacted_customer_support = yield siftscience.event.custom_event('contacted_customer_support', {
+var result = yield siftscience.event.custom_event('contacted_customer_support', {
   '$session_id': session.id,
   '$user_id':    user.id
 });
@@ -101,13 +101,13 @@ var siftscience = require('yield-siftscience')({
 Then you could use
 
 ```js
-var submit_comment = yield siftscience.event.referral_code_redeemed({
+var result = yield siftscience.event.referral_code_redeemed({
   '$session_id': session.id,
   '$user_id':    user.id,
   'code':        'abc123'
 });
 
-var delete_account = yield siftscience.event.contacted_customer_support({
+var result = yield siftscience.event.contacted_customer_support({
   '$session_id': session.id,
   '$user_id':    user.id,
 });
@@ -136,7 +136,7 @@ var result = yield siftscience.unlabel(user.id);
 #### Get Score:
 
 ```js
-var score = yield siftscience.score(user.id);
+var result = yield siftscience.score(user.id);
 ```
 
 ## DEVICE FINGERPRINTING API
@@ -407,10 +407,11 @@ http://localhost:3000
 
 #### 0.0.10
   - **BREAKING CHANGE:** Consolidate init args into one `options` arg - see [USAGE](#usage)
-  - Add support for `return_action` in init options - this is undocumented by sift science is not commonly used
+  - Add support for `return_action` in init options - this is undocumented by sift science and is not commonly used
   - Add support for device fingerprinting api
   - Add support for partner api - **NOTE:** I do not have a partner account with sift science, this is untested. Please report any bugs.
   - Add `CONSTANTS` object to `siftscience` object for things like `$reasons` and `$shipping_method` - see [LABELS API](#labels-api)
+  - Add a minimal test package
 
 #### 0.0.9
   - Add `unlabel` method to `siftscience` object
