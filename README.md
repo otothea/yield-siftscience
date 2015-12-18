@@ -22,6 +22,7 @@ Also supports regular [callbacks](#callbacks).
 ## INSTALLATION
 
 #### Using [npm](https://npmjs.org):
+
 ```bash
 $ npm install yield-siftscience
 ```
@@ -31,6 +32,7 @@ $ npm install yield-siftscience
 #### Require with [API Key](https://siftscience.com/console/developer/api-keys):
 
 Default API version
+
 ```js
 var siftscience = require('yield-siftscience')({
   api_key: 'YOUR_SIFT_SCIENCE_REST_API_KEY'
@@ -38,6 +40,7 @@ var siftscience = require('yield-siftscience')({
 ```
 
 For a specific siftscience API version
+
 ```js
 var siftscience = require('yield-siftscience')({
   api_key: 'YOUR_SIFT_SCIENCE_REST_API_KEY',
@@ -45,7 +48,8 @@ var siftscience = require('yield-siftscience')({
 });
 ```
 
-#### Available options:
+#### Available Options:
+
   - **api_key:** *required* [get your api key](https://siftscience.com/console/developer/api-keys)
   - **account_id:** *optional* (required for [device fingerprinting api](#device-fingerprinting-api), [get your account id](https://siftscience.com/console/account/profile))
   - **partner_id:** *optional* (required for [partner api](#partner-api), [get your partner id](https://siftscience.com/console/account/profile))
@@ -144,6 +148,7 @@ var result = yield siftscience.score(user.id);
 #### JavaScript Snippet:
 
 Install the following JavaScript snippet on every public-facing page on your site. Do not include this snippet on internal tools or administration systems.
+
 Replace `'UNIQUE_SESSION_ID'`, `'UNIQUE_USER_ID'`, and `'INSERT_JS_SNIPPET_KEY_HERE'` with proper values
 
 ```js
@@ -225,7 +230,7 @@ var siftscience = require('yield-siftscience')({
 })
 ```
 
-#### Create an account:
+#### Create Account:
 
 ```js
 var result = yield siftscience.partner.create_account({
@@ -236,13 +241,13 @@ var result = yield siftscience.partner.create_account({
 });
 ```
 
-#### List accounts:
+#### List Accounts:
 
 ```js
 var result = yield siftscience.partner.list_accounts();
 ```
 
-#### Configure notifications:
+#### Configure Notifications:
 
 ```js
 var result = yield siftscience.partner.configure_notifications({
@@ -254,6 +259,7 @@ var result = yield siftscience.partner.configure_notifications({
 ## CALLBACKS
 
 #### Don't know what yielding or promising is? All calls support regular callbacks:
+
 ```js
 siftscience.score(user.id, function(_err, _response) {
   if (_err) {
@@ -267,6 +273,7 @@ siftscience.score(user.id, function(_err, _response) {
 ```
 
 #### You can also inject a global callback for all requests:
+
 ```js
 var siftscience = require('yield-siftscience')({
   api_key:         'YOUR_SIFT_SCIENCE_REST_API_KEY',
@@ -362,14 +369,14 @@ siftscience.CONSTANTS = {
 
 ## TESTING
 
-#### Copy the example config:
+#### Copy Example Config:
 
 ```bash
 $ cp test/config-example.js test/config.js
 $ nano test/config.js
 ```
 
-#### Set your sandbox [api key](https://siftscience.com/console/developer/api-keys), [js key](https://siftscience.com/console/developer/api-keys), and [account id](https://siftscience.com/console/account/profile)
+#### Set Sandbox [API Key](https://siftscience.com/console/developer/api-keys), [JS Key](https://siftscience.com/console/developer/api-keys), and [Account ID](https://siftscience.com/console/account/profile)
 
 ```js
 module.exports = {
@@ -381,7 +388,7 @@ module.exports = {
 };
 ```
 
-#### Install npm dependencies:
+#### Install Dependencies:
 
 ```bash
 $ cd test
@@ -389,13 +396,15 @@ $ npm install
 $ cd ..
 ```
 
-#### Run the test:
+#### Run Test:
 
 ```bash
 $ npm test
 ```
 
-#### Visit the web page to create the page view for the test user:
+#### Visit Page:
+
+Visiting the test web page will trigger a page view for user_id = '1' and session_id = '1'
 
 ```
 http://localhost:3000
@@ -405,7 +414,8 @@ http://localhost:3000
 
 ## CHANGE LOG
 
-#### 0.0.10
+#### 0.0.10:
+
   - **BREAKING CHANGE:** Consolidate init args into one `options` arg - see [USAGE](#usage)
   - Add support for `return_action` in init options - this is undocumented by sift science and is not commonly used
   - Add support for device fingerprinting api
@@ -413,5 +423,6 @@ http://localhost:3000
   - Add `CONSTANTS` object to `siftscience` object for things like `$reasons` and `$shipping_method` - see [LABELS API](#labels-api)
   - Add a minimal test package
 
-#### 0.0.9
+#### 0.0.9:
+
   - Add `unlabel` method to `siftscience` object
