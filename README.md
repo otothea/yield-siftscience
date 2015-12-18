@@ -1,9 +1,23 @@
-Yield Sift Science - NodeJS
-===
+# Yield Sift Science - NodeJS
 
 A promise-wrapped helper lib for yielding Sift Science API calls in nodejs.
 
 Also supports regular [callbacks](#callbacks).
+
+#### Table of contents:
+
+  - [Installation](#installation)
+  - [Usage](#usage)
+  - [Events API](#events-api)
+  - [Labels API](#labels-api)
+  - [Score API](#score-api)
+  - [Device Fingerprinting API](#device-fingerprinting-api)
+  - [Partner API](#partner-api)
+  - [Callbacks](#callbacks)
+  - [Constants](#constants)
+  - [Sift Science Documentation](https://siftscience.com/docs)
+  - [Testing](#testing)
+  - [Change Log](#change-log)
 
 ## INSTALLATION
 
@@ -34,14 +48,16 @@ var siftscience = require('yield-siftscience')({
 #### Available options:
   - **api_key:** *required* [get your api key](https://siftscience.com/console/developer/api-keys)
   - **account_id:** *optional* (required for [device fingerprinting api](#device-fingerprinting-api), [get your account id](https://siftscience.com/console/account/profile))
-  - **version:** *optional*  (default: 'v203')
-  - **custom_events:** *optional*  (ex: ['submit_comment', 'delete_account', ...])
-  - **global_callback:** *optional* (ex: function(err, response) { ... } - can be used to override promise and make regular callback on all requests)
-  - **return_action:** *optional* (default: false - can be used to get extra params from sift science responses although it is undocumented)
+  - **partner_id:** *optional* (required for [partner api](#partner-api), [get your partner id](https://siftscience.com/console/account/profile))
+  - **version:** *optional*  (default: `'v203'`)
+  - **custom_events:** *optional*  (ex: `['submit_comment', 'delete_account', ...]`)
+  - **global_callback:** *optional* (ex: `function(err, response) { ... }` - can be used to override promise and make regular callback on all requests)
+  - **return_action:** *optional* (default: `false` - can be used to get extra params from sift science responses although it is undocumented)
 
 ## EVENTS API
 
 #### Send Event:
+
 ```js
 var create_account = yield siftscience.event.create_account({
   '$session_id': session.id,
@@ -57,6 +73,7 @@ var login = yield siftscience.event.login({
 ```
 
 #### Send Generic Custom Event:
+
 ```js
 var submit_comment = yield siftscience.event.custom_event('submit_comment', {
   '$session_id': session.id,
@@ -101,6 +118,7 @@ var delete_account = yield siftscience.event.delete_account({
 ## LABELS API
 
 #### Send Label:
+
 ```js
 var result = yield siftscience.label(user.id, {
   '$is_bad':      true,
@@ -110,6 +128,7 @@ var result = yield siftscience.label(user.id, {
 ```
 
 #### Remove Label:
+
 ```js
 var result = yield siftscience.unlabel(user.id);
 ```
@@ -117,6 +136,7 @@ var result = yield siftscience.unlabel(user.id);
 ## SCORE API
 
 #### Get Score:
+
 ```js
 var score = yield siftscience.score(user.id);
 ```
@@ -125,7 +145,8 @@ var score = yield siftscience.score(user.id);
 
 #### JavaScript Snippet:
 
-Add this snippet to your html pages. Replace `'UNIQUE_SESSION_ID'`, `'UNIQUE_USER_ID'`, and `'INSERT_JS_SNIPPET_KEY_HERE'` with proper values
+Install the following JavaScript snippet on every public-facing page on your site. Do not include this snippet on internal tools or administration systems.
+Replace `'UNIQUE_SESSION_ID'`, `'UNIQUE_USER_ID'`, and `'INSERT_JS_SNIPPET_KEY_HERE'` with proper values
 
 ```js
 <script type="text/javascript">
@@ -169,25 +190,67 @@ var siftscience = require('yield-siftscience')({
 #### Get Session:
 
 ```js
-var result = yield siftscience.fingerprint.getSession(session.id);
+var result = yield siftscience.fingerprint.get_session(session.id);
 ```
 
 #### Get Device:
 
 ```js
-var result = yield siftscience.fingerprint.getDevice(device_fingerprint);
+var result = yield siftscience.fingerprint.get_device(device_fingerprint);
 ```
 
 #### Label Device:
 
 ```js
-var result = yield siftscience.fingerprint.labelDevice(device_fingerprint, siftscience.CONSTANTS.DEVICE_LABEL.BAD);
+var result = yield siftscience.fingerprint.label_device(device_fingerprint, siftscience.CONSTANTS.DEVICE_LABEL.BAD);
 ```
 
 #### Get Devices:
 
 ```js
-var result = yield siftscience.fingerprint.getDevices(user.id);
+var result = yield siftscience.fingerprint.get_devices(user.id);
+```
+
+## PARTNER API
+
+**NOTE:** I have not tested these as I do not have a partner account with sift science. Please report any bugs.
+
+#### Init with Account ID and Partner ID (they may be the same thing, I'm not sure):
+
+An Account & Partner ID are required to use the partner api. [Get your Account & Partner ID](https://siftscience.com/console/account/profile)
+
+```js
+var siftscience = require('yield-siftscience')({
+  api_key:    'YOUR_SIFT_SCIENCE_REST_API_KEY',
+  account_id: 'YOUR_SIFT_SCIENCE_ACCOUNT_ID',
+  partner_id: 'YOUR_SIFT_SCIENCE_PARTNER_ID'
+})
+```
+
+#### Create an account:
+
+```js
+var result = yield siftscience.partner.create_account({
+  site_url:      'merchant123.com',
+  site_email:    'owner@merchant123.com',
+  analyst_email: 'john.doe@merchant123.com',
+  password:      's0mepA55word'
+});
+```
+
+#### List accounts:
+
+```js
+var result = yield siftscience.partner.list_accounts();
+```
+
+#### Configure notifications:
+
+```js
+var result = yield siftscience.partner.configure_notifications({
+  http_notification_url:       'https://api.partner.com/notify?account=%s',
+  http_notification_threshold: 0.5
+});
 ```
 
 ## CALLBACKS
@@ -309,10 +372,6 @@ siftscience.CONSTANTS = {
 };
 ```
 
-## CODE DOCUMENTATION
-
-Please look at the code [yield-siftscience/lib/app.js](https://github.com/otothea/yield-siftscience/blob/master/lib/app.js) for more technical documentation
-
 ## SIFT SCIENCE DOCUMENTATION
 
 [siftscience.com/docs](https://siftscience.com/docs)
@@ -347,6 +406,7 @@ $ npm test
   - **BREAKING CHANGE:** Consolidate init args into one `options` arg - see [USAGE](#usage)
   - Add support for `return_action` in init options - this is undocumented by sift science is not commonly used
   - Add support for device fingerprinting api
+  - Add support for partner api - **NOTE:** I do not have a partner account with sift science, this is untested. Please report any bugs.
   - Add `CONSTANTS` object to `siftscience` object for things like `$reasons` and `$shipping_method` - see [LABELS API](#labels-api)
 
 #### 0.0.9

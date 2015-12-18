@@ -17,7 +17,7 @@ siftscience.event.create_account({
   '$phone':      '123-456-7890'
 })
 .then(function(response) {
-  console.log('CREATE ACCOUNT: ', response, '\n');
+  console.log('CREATE ACCOUNT: ', siftscience.CONSTANTS.RESPONSE_STATUS_MESSAGE[response.status], '\n');
 
   //
   // UPDATE ACCOUNT EVENT
@@ -30,7 +30,7 @@ siftscience.event.create_account({
     '$phone':      '123-456-7890'
   })
   .then(function(response) {
-    console.log('UPDATE ACCOUNT: ', response, '\n');
+    console.log('UPDATE ACCOUNT: ', siftscience.CONSTANTS.RESPONSE_STATUS_MESSAGE[response.status], '\n');
 
     //
     // LOGIN EVENT
@@ -40,7 +40,7 @@ siftscience.event.create_account({
       '$session_id': '1'
     })
     .then(function(response) {
-      console.log('LOGIN: ', response, '\n');
+      console.log('LOGIN: ', siftscience.CONSTANTS.RESPONSE_STATUS_MESSAGE[response.status], '\n');
 
       //
       // CUSTOM EVENT 1
@@ -52,54 +52,54 @@ siftscience.event.create_account({
         'custom_prop_2': 'custom prop 2'
       })
       .then(function(response) {
-        console.log('CUSTOM EVENT 1: ', response, '\n');
+        console.log('CUSTOM EVENT 1: ', siftscience.CONSTANTS.RESPONSE_STATUS_MESSAGE[response.status], '\n');
 
         //
         // LABEL USER
         //
         siftscience.label('1', {
           '$is_bad':      true,
-          '$reasons':     [ siftscience.CONSTANTS.REASON.CHARGEBACK, siftscience.CONSTANTS.REASON.SPAM ],
+          '$reasons':     [siftscience.CONSTANTS.REASON.CHARGEBACK, siftscience.CONSTANTS.REASON.SPAM],
           '$description': 'Spamming and fraud'
         })
         .then(function(response) {
-          console.log('LABEL: ', response, '\n');
+          console.log('LABEL: ', siftscience.CONSTANTS.RESPONSE_STATUS_MESSAGE[response.status], '\n');
 
           //
           // SCORE USER
           //
           siftscience.score('1')
           .then(function(response) {
-            console.log('SCORE: ', response, '\n');
+            console.log('SCORE: ', siftscience.CONSTANTS.RESPONSE_STATUS_MESSAGE[response.status], '\n');
 
             //
             // GET DEVICES
             //
-            siftscience.fingerprint.getDevices('1')
+            siftscience.fingerprint.get_devices('1')
             .then(function(response) {
-              console.log('GET DEVICES: ', response, '\n');
+              console.log('GET DEVICES: ', siftscience.CONSTANTS.RESPONSE_STATUS_MESSAGE[response.status], '\n');
 
               //
               // GET SESSION
               //
-              siftscience.fingerprint.getSession('1')
+              siftscience.fingerprint.get_session('1')
               .then(function(response) {
-                console.log('SESSION: ', response, '\n');
+                console.log('SESSION: ', siftscience.CONSTANTS.RESPONSE_STATUS_MESSAGE[response.status], '\n');
 
                 //
                 // GET DEVICE
                 //
                 if (response.device) {
-                  siftscience.fingerprint.getDevice(response.device.id)
+                  siftscience.fingerprint.get_device(response.device.id)
                   .then(function(response) {
-                    console.log('GET DEVICE: ', response, '\n');
+                    console.log('GET DEVICE: ', siftscience.CONSTANTS.RESPONSE_STATUS_MESSAGE[response.status], '\n');
 
                     //
                     // LABEL DEVICE
                     //
-                    siftscience.fingerprint.labelDevice(response.id, siftscience.CONSTANTS.DEVICE_LABEL.BAD)
+                    siftscience.fingerprint.label_device(response.id, siftscience.CONSTANTS.DEVICE_LABEL.BAD)
                     .then(function(response) {
-                      console.log('LABEL DEVICE: ', response, '\n');
+                      console.log('LABEL DEVICE: ', siftscience.CONSTANTS.RESPONSE_STATUS_MESSAGE[response.status], '\n');
                     })
                     .catch(function(err) {
                       console.log('LABEL DEVICE ERROR: ', err, '\n');
