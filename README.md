@@ -68,7 +68,7 @@ var create_account = yield siftscience.event.create_account({
 var login = yield siftscience.event.login({
   '$session_id':   session.id,
   '$user_id':      user.id,
-  '$login_status': siftscience.CONSTANTS.LOGIN_STATUS.SUCCESS
+  '$login_status': siftscience.CONSTANTS.STATUS.SUCCESS
 });
 ```
 
@@ -302,7 +302,7 @@ siftscience.CONSTANTS = {
     WITHDRAWAL: '$withdrawal',
     TRANSFER:   '$transfer'
   },
-  TRANSACTION_STATUS: {
+  STATUS: {
     SUCCESS: '$success',
     FAILURE: '$failure',
     PENDING: '$pending'
@@ -313,15 +313,6 @@ siftscience.CONSTANTS = {
     YAHOO:    '$yahoo',
     TWITTER:  '$twitter',
     OTHER:    '$other'
-  },
-  SUBMISSION_STATUS: {
-    SUCCESS: '$success',
-    FAILURE: '$failure',
-    PENDING: '$pending'
-  },
-  LOGIN_STATUS: {
-    SUCCESS: '$success',
-    FAILURE: '$failure'
   },
   PAYMENT_TYPE: {
     CREDIT_CARD:              '$credit_card',
@@ -338,11 +329,6 @@ siftscience.CONSTANTS = {
     INTERAC:                  '$interac',
     MASTERPASS:               '$masterpass',
     THIRD_PARTY_PROCESSOR:    '$third_party_processor'
-  },
-  TRANSACTION_STATUS: {
-    SUCCESS: '$success',
-    FAILURE: '$failure',
-    PENDING: '$pending'
   },
   RESPONSE_STATUS_MESSAGE: {
     '0':   'Success',
