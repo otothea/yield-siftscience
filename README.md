@@ -75,14 +75,13 @@ var login = yield siftscience.event.login({
 #### Send Generic Custom Event:
 
 ```js
-var submit_comment = yield siftscience.event.custom_event('submit_comment', {
+var referral_code_redeemed = yield siftscience.event.custom_event('referral_code_redeemed', {
   '$session_id': session.id,
   '$user_id':    user.id,
-  '$user_email': user.email,
-  'content':     'blah blah blah comment'
+  'code':        'abc123'
 });
 
-var delete_account = yield siftscience.event.custom_event('delete_account', {
+var contacted_customer_support = yield siftscience.event.custom_event('contacted_customer_support', {
   '$session_id': session.id,
   '$user_id':    user.id
 });
@@ -95,21 +94,20 @@ Optionally, you can pass in an array of custom event names to add to the lib
 ```js
 var siftscience = require('yield-siftscience')({
   api_key:       'YOUR_SIFT_SCIENCE_REST_API_KEY',
-  custom_events: ['submit_comment', 'delete_account', ...]
+  custom_events: ['referral_code_redeemed', 'contacted_customer_support', ...]
 });
 ```
 
 Then you could use
 
 ```js
-var submit_comment = yield siftscience.event.submit_comment({
+var submit_comment = yield siftscience.event.referral_code_redeemed({
   '$session_id': session.id,
   '$user_id':    user.id,
-  '$user_email': user.email,
-  'content':     'blah blah blah comment'
+  'code':        'abc123'
 });
 
-var delete_account = yield siftscience.event.delete_account({
+var delete_account = yield siftscience.event.contacted_customer_support({
   '$session_id': session.id,
   '$user_id':    user.id,
 });
@@ -371,20 +369,31 @@ $ cp test/config-example.js test/config.js
 $ nano test/config.js
 ```
 
-#### Set your **sandbox** [api key](https://siftscience.com/console/developer/api-keys) and [account id](https://siftscience.com/console/account/profile)
+#### Set your sandbox [api key](https://siftscience.com/console/developer/api-keys), [js key](https://siftscience.com/console/developer/api-keys), and [account id](https://siftscience.com/console/account/profile)
 
 ```js
 module.exports = {
   api_key:    'xxxxxxxxxxxxxxxx',
-  account_id: 'xxxxxxxxxxxxxxxxxxxxxxxx'
+  account_id: 'xxxxxxxxxxxxxxxxxxxxxxxx',
+  js_key:     'xxxxxxxxxx',
+  host:       'localhost',
+  port:       3000
 };
 ```
 
-#### Run the test requests
+#### Run the test:
 
 ```bash
 $ npm test
 ```
+
+#### Visit the web page to create the page view for the test user:
+
+```
+http://localhost:3000
+```
+
+**NOTE:** You will have to run the test a second time if this is your first time visiting the test web page
 
 ## CHANGE LOG
 
