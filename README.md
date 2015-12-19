@@ -57,7 +57,7 @@ var siftscience = require('yield-siftscience')({
   - **version:** *optional*  (default: `'v203'`)
   - **custom_events:** *optional*  (ex: `['submit_comment', 'delete_account', ...]`)
   - **global_callback:** *optional* (ex: `function(err, response) { ... }` - can be used to override promise and make regular callback on all requests)
-  - **return_action:** *optional* (default: `false` - can be used to get extra params from sift science responses although it is undocumented)
+  - **return_action:** *optional* (default: `false` - can be used to get extra params from sift science responses [more info](https://siftscience.com/resources/tutorials/formulas#add-actions))
   - **webhooks:** *optional* (default: `{}` - see [webhooks](#webhooks) for usage)
 
 ## EVENTS API
@@ -397,12 +397,12 @@ var siftscience = require('yield-siftscience')({
   webhooks: {
     // This will receive all webhooks, regardless of Action ID
     all: function(req, res, done) {
-      console.log('all');
+      console.log('all: ', req.body);
       done();
     },
     // This will receive webhooks with Action ID 'test'
     test: function(req, res, done) {
-      console.log('test');
+      console.log('test: ', req.body);
       done();
     }
   }
@@ -469,7 +469,7 @@ http://localhost:3000
 #### 0.1.0:
 
   - **BREAKING CHANGE:** Consolidate init args into one `options` arg - see [USAGE](#usage)
-  - Add support for `return_action` in init options - this is undocumented by sift science and is not commonly used
+  - Add support for `return_action` in init options - [MORE INFO](https://siftscience.com/resources/tutorials/formulas#add-actions)
   - Add support for device fingerprinting api
   - Add support for partner api - **NOTE:** I do not have a partner account with sift science, this is untested. Please report any bugs.
   - Add `CONSTANTS` object to `siftscience` object for things like `$reasons` and `$shipping_method` - see [LABELS API](#labels-api)

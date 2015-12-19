@@ -10,15 +10,15 @@ var siftscience = require('../lib/app.js')({
   return_action: true,
   webhooks: {
     all: function(req, res, done) {
-      console.log('all');
+      console.log('all: ', req.body, '\n');
       done();
     },
     test: function(req, res, done) {
-      console.log('test');
+      console.log('test: ', req.body, '\n');
       done();
     },
     not: function(req, res, done) {
-      console.log('not');
+      console.log('not: ', req.body, '\n');
       done();
     }
   }
