@@ -13,35 +13,37 @@ var siftscience = require('../lib/app.js')({
 // Run a bunch of test requests
 //
 
-var account = {
-  '$session_id': '1',
-  '$user_id':    '1',
-  '$user_email': 'test@email.com',
-  '$name':       'Test',
-  '$phone':      '123-456-7890'
-};
+var session_id = '1',
+    user_id    = '1';
 
 function init() {
   create_account()
-  .then(update_account)
-  .then(login)
-  .then(custom_event_1)
-  .then(label)
-  .then(score)
-  .then(fingerprint_get_devices)
-  .then(fingerprint_get_session)
-  .then(fingerprint_get_device)
-  .then(fingerprint_label_device)
-  .then(partner_create_account)
-  .then(partner_list_accounts)
-  .then(partner_configure_notifications)
-  .then(start_test_server);
+    .then(update_account)
+    .then(login)
+    .then(custom_event_1)
+    .then(label)
+    .then(score)
+    .then(fingerprint_get_devices)
+    .then(fingerprint_get_session)
+    .then(fingerprint_get_device)
+    .then(fingerprint_label_device)
+    .then(partner_create_account)
+    .then(partner_list_accounts)
+    .then(partner_configure_notifications)
+    .then(start_test_server)
+  ;
 }
 
 init();
 
 function create_account() {
-  return siftscience.event.create_account(account)
+  return siftscience.event.create_account({
+    '$session_id': session_id,
+    '$user_id':    user_id,
+    '$user_email': 'test@email.com',
+    '$name':       'Test',
+    '$phone':      '123-456-7890'
+  })
   .then(function(response) {
     console.log('CREATE ACCOUNT: ', siftscience.CONSTANTS.RESPONSE_STATUS_MESSAGE[response.status], '\n\n', response, '\n');
   })
@@ -52,7 +54,13 @@ function create_account() {
 }
 
 function update_account() {
-  return siftscience.event.update_account(account)
+  return siftscience.event.update_account({
+    '$session_id': session_id,
+    '$user_id':    user_id,
+    '$user_email': 'test@email.com',
+    '$name':       'Test',
+    '$phone':      '123-456-7890'
+  })
   .then(function(response) {
     console.log('UPDATE ACCOUNT: ', siftscience.CONSTANTS.RESPONSE_STATUS_MESSAGE[response.status], '\n\n', response, '\n');
   })
@@ -64,8 +72,8 @@ function update_account() {
 
 function login() {
   return siftscience.event.login({
-    '$session_id':   '1',
-    '$user_id':      '1',
+    '$session_id':   session_id,
+    '$user_id':      user_id,
     '$login_status': siftscience.CONSTANTS.STATUS.SUCCESS
   })
   .then(function(response) {
@@ -79,8 +87,8 @@ function login() {
 
 function custom_event_1() {
   return siftscience.event.custom_event_1({
-    '$session_id': '1',
-    '$user_id':    '1',
+    '$session_id': session_id,
+    '$user_id':    user_id,
     'custom_1':    'custom 1',
     'custom_2':    'custom 2'
   })
@@ -95,7 +103,7 @@ function custom_event_1() {
 }
 
 function label() {
-  return siftscience.label('1', {
+  return siftscience.label(user_id, {
     '$description': 'Spamming and fraud',
     '$reasons':     [siftscience.CONSTANTS.REASON.CHARGEBACK, siftscience.CONSTANTS.REASON.SPAM],
     '$is_bad':      true
@@ -111,7 +119,7 @@ function label() {
 }
 
 function score() {
-  return siftscience.score('1')
+  return siftscience.score(user_id)
   .then(function(response) {
     console.log('SCORE: ', siftscience.CONSTANTS.RESPONSE_STATUS_MESSAGE[response.status], '\n\n', response, '\n');
     return response;
@@ -123,7 +131,7 @@ function score() {
 }
 
 function fingerprint_get_devices() {
-  return siftscience.fingerprint.get_devices('1')
+  return siftscience.fingerprint.get_devices(user_id)
   .then(function(response) {
     console.log('GET DEVICES: ', response, '\n');
     return response;
@@ -135,7 +143,7 @@ function fingerprint_get_devices() {
 }
 
 function fingerprint_get_session() {
-  return siftscience.fingerprint.get_session('1')
+  return siftscience.fingerprint.get_session(session_id)
   .then(function(response) {
     console.log('SESSION: ', response, '\n');
     return response;
@@ -147,7 +155,6 @@ function fingerprint_get_session() {
 }
 
 function fingerprint_get_device(_response) {
-
   return siftscience.fingerprint.get_device(_response.device.id)
   .then(function(response) {
     console.log('GET DEVICE: ', response, '\n');
