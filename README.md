@@ -251,8 +251,8 @@ var result = yield siftscience.partner.list_accounts();
 
 ```js
 var result = yield siftscience.partner.configure_notifications({
-  http_notification_url:       'https://api.partner.com/notify?account=%s',
-  http_notification_threshold: 0.5
+  http_notification_threshold: 0.5,
+  http_notification_url:       'https://api.partner.com/notify?account=%s'
 });
 ```
 
