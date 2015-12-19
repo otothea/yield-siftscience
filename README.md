@@ -15,6 +15,7 @@ Also supports regular [callbacks](#callbacks).
   - [Partner API](#partner-api)
   - [Callbacks](#callbacks)
   - [Constants](#constants)
+  - [Webhooks](#webhooks)
   - [Sift Science Documentation](https://siftscience.com/docs)
   - [Testing](#testing)
   - [Change Log](#change-log)
@@ -57,6 +58,7 @@ var siftscience = require('yield-siftscience')({
   - **custom_events:** *optional*  (ex: `['submit_comment', 'delete_account', ...]`)
   - **global_callback:** *optional* (ex: `function(err, response) { ... }` - can be used to override promise and make regular callback on all requests)
   - **return_action:** *optional* (default: `false` - can be used to get extra params from sift science responses although it is undocumented)
+  - **webhooks:** *optional* (default: `{}` - see [webhooks](#webhooks) for usage)
 
 ## EVENTS API
 
@@ -369,6 +371,50 @@ siftscience.CONSTANTS = {
 };
 ```
 
+## WEBHOOKS
+
+**NOTE:** Currently only supports express/body-parser
+
+#### Install Express/Body-Parser:
+
+```bash
+$ npm install --save express
+$ npm install --save body-parser
+$ npm install --save yield-siftscience
+```
+
+#### Example App:
+
+Let's say you have [created an action](https://siftscience.com/console/actions/users) called "Test" with Action ID `test`
+
+```js
+var express    = require('express');
+var bodyParser = require('body-parser');
+
+// Require yield-siftscience with a webhooks mapping option
+var siftscience = require('yield-siftscience')({
+  api_key: 'YOUR_SIFT_SCIENCE_REST_API_KEY',
+  webhooks: {
+    // This will receive all webhooks, regardless of Action ID
+    all: function(req, res, done) {
+      console.log('all');
+      done();
+    },
+    // This will receive webhooks with Action ID 'test'
+    test: function(req, res, done) {
+      console.log('test');
+      done();
+    }
+  }
+});
+
+// Set up the webhook listener
+var app = express();
+app.post('/siftscience', bodyParser.json(), siftscience.webhook.express());
+
+app.listen(config.port);
+```
+
 ## SIFT SCIENCE DOCUMENTATION
 
 [siftscience.com/docs](https://siftscience.com/docs)
@@ -420,13 +466,14 @@ http://localhost:3000
 
 ## CHANGE LOG
 
-#### 0.0.10:
+#### 0.1.0:
 
   - **BREAKING CHANGE:** Consolidate init args into one `options` arg - see [USAGE](#usage)
   - Add support for `return_action` in init options - this is undocumented by sift science and is not commonly used
   - Add support for device fingerprinting api
   - Add support for partner api - **NOTE:** I do not have a partner account with sift science, this is untested. Please report any bugs.
   - Add `CONSTANTS` object to `siftscience` object for things like `$reasons` and `$shipping_method` - see [LABELS API](#labels-api)
+  - Add express/body-parser webhook support
   - Add a minimal test package
 
 #### 0.0.9:

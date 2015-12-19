@@ -1,6 +1,6 @@
 {
   "name": "yield-siftscience-test",
-  "version": "0.0.10",
+  "version": "0.1.0",
   "description": "Test for yield-siftscience",
   "author": "Oscar Armstrong <oscar@otothea.com> (https://github.com/otothea)",
   "homepage": "https://otothea.com",
@@ -10,6 +10,7 @@
   },
   "license": "MIT",
   "dependencies": {
+    "body-parser": "1.14.2",
     "express": "4.13.3"
   }
 }

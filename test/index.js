@@ -1,12 +1,27 @@
 var config      = require('./config.js');
 var express     = require('express');
+var bodyParser  = require('body-parser');
 
 var siftscience = require('../lib/app.js')({
   api_key:       config.api_key,
   account_id:    config.account_id,
   partner_id:    config.account_id,
   custom_events: ['custom_event_1', 'custom_event_2'],
-  return_action: true
+  return_action: true,
+  webhooks: {
+    all: function(req, res, done) {
+      console.log('all');
+      done();
+    },
+    test: function(req, res, done) {
+      console.log('test');
+      done();
+    },
+    not: function(req, res, done) {
+      console.log('not');
+      done();
+    }
+  }
 });
 
 //
@@ -226,13 +241,15 @@ function start_test_server() {
   var app = express();
 
   app.get('/', function (req, res) {
-    res.send('<!DOCTYPE html><head><script type="text/javascript">var _sift=_sift||[];_sift.push(["_setAccount","' + config.js_key + '"]);_sift.push(["_setSessionId","1"]);_sift.push(["_setUserId","1"]);_sift.push(["_trackPageview"]);(function(){function ls(){var e=document.createElement("script");e.type="text/javascript";e.async=true;e.src=("https:"==document.location.protocol?"https://":"http://")+"cdn.siftscience.com/s.js";var s=document.getElementsByTagName("script")[0];s.parentNode.insertBefore(e,s);}if(window.attachEvent){window.attachEvent("onload",ls);}else{window.addEventListener("load",ls,false);}})();</script></head><body><h1>Yeild-SiftScience Test Page</h1></body></html>');
+    res.send('<!DOCTYPE html><head><script type="text/javascript">var _sift=_sift||[];_sift.push(["_setAccount","' + config.js_key + '"]);_sift.push(["_setSessionId","' + session_id + '"]);_sift.push(["_setUserId","' + user_id + '"]);_sift.push(["_trackPageview"]);(function(){function ls(){var e=document.createElement("script");e.type="text/javascript";e.async=true;e.src=("https:"==document.location.protocol?"https://":"http://")+"cdn.siftscience.com/s.js";var s=document.getElementsByTagName("script")[0];s.parentNode.insertBefore(e,s);}if(window.attachEvent){window.attachEvent("onload",ls);}else{window.addEventListener("load",ls,false);}})();</script></head><body><p>yield-siftscience test page</p></body></html>');
   });
+
+  app.post('/siftscience', bodyParser.json(), siftscience.webhook.express());
 
   var server = app.listen(config.port, config.host, function () {
     var host = server.address().address;
     var port = server.address().port;
 
-    console.log('Test app listening at http://%s:%s', host, port, '\n');
+    console.log('Test app listening at http://' + host + ':' + port, '\n');
   });
 }
