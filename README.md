@@ -68,7 +68,9 @@ var result = yield siftscience.event.create_account({
   '$user_id':    user.id,
   '$user_email': user.email
 });
+```
 
+```js
 var result = yield siftscience.event.login({
   '$session_id':   session.id,
   '$user_id':      user.id,
@@ -84,7 +86,9 @@ var result = yield siftscience.event.custom_event('referral_code_redeemed', {
   '$user_id':    user.id,
   'code':        'abc123'
 });
+```
 
+```js
 var result = yield siftscience.event.custom_event('contacted_customer_support', {
   '$session_id': session.id,
   '$user_id':    user.id
@@ -110,7 +114,9 @@ var result = yield siftscience.event.referral_code_redeemed({
   '$user_id':    user.id,
   'code':        'abc123'
 });
+```
 
+```js
 var result = yield siftscience.event.contacted_customer_support({
   '$session_id': session.id,
   '$user_id':    user.id,
@@ -346,7 +352,7 @@ siftscience.CONSTANTS = {
     57:  'Invalid HTTP body',
     60:  'Rate limited; too many events have been received in a short period of time',
     104: 'Invalid API version',
-    105': 'Not a valid reserved field'
+    105: 'Not a valid reserved field'
   },
   REASON: {
     CHARGEBACK:        '$chargeback',
