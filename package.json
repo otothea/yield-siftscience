@@ -1,6 +1,6 @@
 {
   "name": "yield-siftscience",
-  "version": "0.0.9",
+  "version": "0.1.0",
   "description": "Promise-wrapped Sift Science lib for yielding. Also supports regular callback functions.",
   "author": "Oscar Armstrong <oscar@otothea.com> (https://github.com/otothea)",
   "homepage": "https://otothea.com",
