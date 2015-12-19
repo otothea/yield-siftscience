@@ -32,20 +32,9 @@ $ npm install yield-siftscience
 
 #### Require with [API Key](https://siftscience.com/console/developer/api-keys):
 
-Default API version
-
 ```js
 var siftscience = require('yield-siftscience')({
   api_key: 'YOUR_SIFT_SCIENCE_REST_API_KEY'
-});
-```
-
-For a specific siftscience API version
-
-```js
-var siftscience = require('yield-siftscience')({
-  api_key: 'YOUR_SIFT_SCIENCE_REST_API_KEY',
-  version: 'v203'
 });
 ```
 
@@ -54,7 +43,6 @@ var siftscience = require('yield-siftscience')({
   - **api_key:** *required* [get your api key](https://siftscience.com/console/developer/api-keys)
   - **account_id:** *optional* (required for [device fingerprinting api](#device-fingerprinting-api), [get your account id](https://siftscience.com/console/account/profile))
   - **partner_id:** *optional* (required for [partner api](#partner-api), [get your partner id](https://siftscience.com/console/account/profile))
-  - **version:** *optional*  (default: `'v203'`)
   - **custom_events:** *optional*  (ex: `['submit_comment', 'delete_account', ...]`)
   - **global_callback:** *optional* (ex: `function(err, response) { ... }` - can be used to override promise and make regular callback on all requests)
   - **return_action:** *optional* (default: `false` - can be used to get extra params from sift science responses [more info](https://siftscience.com/resources/tutorials/formulas#add-actions))
