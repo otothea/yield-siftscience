@@ -3,6 +3,7 @@ var express     = require('express');
 var siftscience = require('../lib/app.js')({
   api_key:       config.api_key,
   account_id:    config.account_id,
+  partner_id:    config.account_id,
   custom_events: ['custom_event_1', 'custom_event_2'],
   return_action: true
 });
@@ -35,7 +36,7 @@ siftscience.event.create_account({
   '$phone':      '123-456-7890'
 })
 .then(function(response) {
-  console.log('CREATE ACCOUNT: ', siftscience.CONSTANTS.RESPONSE_STATUS_MESSAGE[response.status], '\n');
+  console.log('CREATE ACCOUNT: ', siftscience.CONSTANTS.RESPONSE_STATUS_MESSAGE[response.status], '\n\n', response, '\n');
 
   //
   // UPDATE ACCOUNT EVENT
@@ -48,7 +49,7 @@ siftscience.event.create_account({
     '$phone':      '123-456-7890'
   })
   .then(function(response) {
-    console.log('UPDATE ACCOUNT: ', siftscience.CONSTANTS.RESPONSE_STATUS_MESSAGE[response.status], '\n');
+    console.log('UPDATE ACCOUNT: ', siftscience.CONSTANTS.RESPONSE_STATUS_MESSAGE[response.status], '\n\n', response, '\n');
 
     //
     // LOGIN EVENT
@@ -58,7 +59,7 @@ siftscience.event.create_account({
       '$session_id': '1'
     })
     .then(function(response) {
-      console.log('LOGIN: ', siftscience.CONSTANTS.RESPONSE_STATUS_MESSAGE[response.status], '\n');
+      console.log('LOGIN: ', siftscience.CONSTANTS.RESPONSE_STATUS_MESSAGE[response.status], '\n\n', response, '\n');
 
       //
       // CUSTOM EVENT 1
@@ -70,7 +71,7 @@ siftscience.event.create_account({
         'custom_prop_2': 'custom prop 2'
       })
       .then(function(response) {
-        console.log('CUSTOM EVENT 1: ', siftscience.CONSTANTS.RESPONSE_STATUS_MESSAGE[response.status], '\n');
+        console.log('CUSTOM EVENT 1: ', siftscience.CONSTANTS.RESPONSE_STATUS_MESSAGE[response.status], '\n\n', response, '\n');
 
         //
         // LABEL USER
@@ -81,14 +82,14 @@ siftscience.event.create_account({
           '$description': 'Spamming and fraud'
         })
         .then(function(response) {
-          console.log('LABEL: ', siftscience.CONSTANTS.RESPONSE_STATUS_MESSAGE[response.status], '\n');
+          console.log('LABEL: ', siftscience.CONSTANTS.RESPONSE_STATUS_MESSAGE[response.status], '\n\n', response, '\n');
 
           //
           // SCORE USER
           //
           siftscience.score('1')
           .then(function(response) {
-            console.log('SCORE: ', siftscience.CONSTANTS.RESPONSE_STATUS_MESSAGE[response.status], '\n');
+            console.log('SCORE: ', siftscience.CONSTANTS.RESPONSE_STATUS_MESSAGE[response.status], '\n\n', response, '\n');
 
             //
             // GET DEVICES
@@ -118,6 +119,53 @@ siftscience.event.create_account({
                     siftscience.fingerprint.label_device(response.id, siftscience.CONSTANTS.DEVICE_LABEL.BAD)
                     .then(function(response) {
                       console.log('LABEL DEVICE: ', response, '\n');
+
+                      //
+                      // CREATE PARTNER ACCOUNT
+                      //
+                      siftscience.partner.create_account({
+                        site_url:      'merchant123.com',
+                        site_email:    'owner@merchant123.com',
+                        analyst_email: 'john.doe@merchant123.com',
+                        password:      's0mepA55word'
+                      })
+                      .then(function(response) {
+                        console.log('CREATE PARTNER ACCOUNT: ', response, '\n');
+
+                        //
+                        // LIST PARTNER ACCOUNTS
+                        //
+                        siftscience.partner.list_accounts()
+                        .then(function(response) {
+                          console.log('LIST PARTNER ACCOUNTS: ', response, '\n');
+
+                          //
+                          // CONFIGURE NOTIFICATIONS
+                          //
+                          siftscience.partner.configure_notifications({
+                            http_notification_url:       'https://api.partner.com/notify?account=%s',
+                            http_notification_threshold: 0.5
+                          })
+                          .then(function(response) {
+                            console.log('CONFIGURE NOTIFICATIONS: ', response, '\n');
+                          })
+                          .catch(function(err) {
+                            console.log('CONFIGURE NOTIFICATIONS ERROR: ', err, '\n');
+                            throw err;
+                          });
+
+                        })
+                        .catch(function(err) {
+                          console.log('LIST PARTNER ACCOUNTS ERROR: ', err, '\n');
+                          throw err;
+                        });
+
+                      })
+                      .catch(function(err) {
+                        console.log('CREATE PARTNER ACCOUNT ERROR: ', err, '\n');
+                        throw err;
+                      });
+
                     })
                     .catch(function(err) {
                       console.log('LABEL DEVICE ERROR: ', err, '\n');

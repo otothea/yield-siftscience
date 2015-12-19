@@ -336,17 +336,17 @@ siftscience.CONSTANTS = {
     THIRD_PARTY_PROCESSOR:    '$third_party_processor'
   },
   RESPONSE_STATUS_MESSAGE: {
-    '0':   'Success',
-    '51':  'Invalid API key',
-    '52':  'Invalid characters in field name',
-    '53':  'Invalid characters in field value',
-    '54':  'Specified user_id has no scoreable events',
-    '55':  'Missing required field',
-    '56':  'Invalid JSON in request',
-    '57':  'Invalid HTTP body',
-    '60':  'Rate limited; too many events have been received in a short period of time',
-    '104': 'Invalid API version',
-    '105': 'Not a valid reserved field'
+    0:   'Success',
+    51:  'Invalid API key',
+    52:  'Invalid characters in field name',
+    53:  'Invalid characters in field value',
+    54:  'Specified user_id has no scoreable events',
+    55:  'Missing required field',
+    56:  'Invalid JSON in request',
+    57:  'Invalid HTTP body',
+    60:  'Rate limited; too many events have been received in a short period of time',
+    104: 'Invalid API version',
+    105': 'Not a valid reserved field'
   },
   REASON: {
     CHARGEBACK:        '$chargeback',
