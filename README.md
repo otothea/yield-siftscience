@@ -43,12 +43,14 @@ var siftscience = require('yield-siftscience')({
   - **api_key:** *required* [get your api key](https://siftscience.com/console/developer/api-keys)
   - **account_id:** *optional* (required for [device fingerprinting api](#device-fingerprinting-api), [get your account id](https://siftscience.com/console/account/profile))
   - **partner_id:** *optional* (required for [partner api](#partner-api), [get your partner id](https://siftscience.com/console/account/profile))
-  - **custom_events:** *optional*  (ex: `['submit_comment', 'delete_account', ...]`)
+  - **custom_events:** *optional*  (ex: `['referral_code_redeemed', 'contacted_customer_support', ...]`)
   - **global_callback:** *optional* (ex: `function(err, response) { ... }` - can be used to override promise and make regular callback on all requests)
   - **return_action:** *optional* (default: `false` - can be used to get extra params from sift science responses [more info](https://siftscience.com/resources/tutorials/formulas#add-actions))
   - **webhooks:** *optional* (default: `{}` - see [webhooks](#webhooks) for usage)
 
 ## EVENTS API
+
+[https://siftscience.com/resources/references/events-api](https://siftscience.com/resources/references/events-api)
 
 #### Send Event:
 
@@ -115,6 +117,8 @@ var result = yield siftscience.event.contacted_customer_support({
 
 ## LABELS API
 
+[https://siftscience.com/resources/references/labels-api](https://siftscience.com/resources/references/labels-api)
+
 #### Send Label:
 
 ```js
@@ -133,6 +137,8 @@ var result = yield siftscience.unlabel(user.id);
 
 ## SCORE API
 
+[https://siftscience.com/resources/references/score-api](https://siftscience.com/resources/references/score-api)
+
 #### Get Score:
 
 ```js
@@ -140,6 +146,8 @@ var result = yield siftscience.score(user.id);
 ```
 
 ## DEVICE FINGERPRINTING API
+
+[https://siftscience.com/resources/references/device-fingerprinting](https://siftscience.com/resources/references/device-fingerprinting)
 
 #### JavaScript Snippet:
 
@@ -211,6 +219,8 @@ var result = yield siftscience.fingerprint.get_devices(user.id);
 ```
 
 ## PARTNER API
+
+[https://siftscience.com/resources/references/partner-api](https://siftscience.com/resources/references/partner-api)
 
 **NOTE:** I have not tested these as I do not have a partner account with sift science. Please report any bugs.
 
