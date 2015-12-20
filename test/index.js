@@ -224,8 +224,9 @@ function partner_list_accounts() {
 
 function partner_configure_notifications() {
   return siftscience.partner.configure_notifications({
-    http_notification_threshold: 0.5,
-    http_notification_url:       'https://api.partner.com/notify?account=%s'
+    email_notification_threshold: 0.5,
+    http_notification_threshold:  0.5,
+    http_notification_url:        'https://api.partner.com/notify?account=%s'
   })
   .then(function(response) {
     console.log('CONFIGURE NOTIFICATIONS: ', response, '\n');
