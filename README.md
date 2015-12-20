@@ -454,6 +454,12 @@ http://localhost:3000
 
 ## CHANGE LOG
 
+#### 0.1.1:
+
+  - Found the `return_action` documentation - [MORE INFO](https://siftscience.com/resources/tutorials/formulas#add-actions)
+  - Remove support for api version option - will only be supporting the most current version `v203`
+  - Add validations for all init options
+
 #### 0.1.0:
 
   - **BREAKING CHANGE:** Consolidate init args into one `options` arg - see [USAGE](#usage)
