@@ -465,6 +465,11 @@ http://localhost:3000
 
 ## CHANGE LOG
 
+#### 0.1.2:
+
+  - Add validations for all arguments
+  - Update readme with more links to source reference
+
 #### 0.1.1:
 
   - Found the `return_action` documentation - [MORE INFO](https://siftscience.com/resources/tutorials/formulas#add-actions)
