@@ -318,7 +318,7 @@ function start_test_server() {
   var app = express();
 
   app.get('/', function (req, res) {
-    res.send('<!DOCTYPE html><head><script type="text/javascript">var _sift=_sift||[];_sift.push(["_setAccount","' + config.js_key + '"]);_sift.push(["_setSessionId","' + session_id + '"]);_sift.push(["_setUserId","' + user_id + '"]);_sift.push(["_trackPageview"]);(function(){function ls(){var e=document.createElement("script");e.type="text/javascript";e.async=true;e.src=("https:"==document.location.protocol?"https://":"http://")+"cdn.siftscience.com/s.js";var s=document.getElementsByTagName("script")[0];s.parentNode.insertBefore(e,s);}if(window.attachEvent){window.attachEvent("onload",ls);}else{window.addEventListener("load",ls,false);}})();</script></head><body><p>yield-siftscience test page</p></body></html>');
+    res.send('<!DOCTYPE html><head><script type="text/javascript">var _sift=window._sift=window._sift||[];_sift.push(["_setAccount","' + config.js_key + '"]);_sift.push(["_setSessionId","' + session_id + '"]);_sift.push(["_setUserId","' + user_id + '"]);_sift.push(["_trackPageview"]);(function(){function ls(){var e=document.createElement("script");e.src="https://cdn.siftscience.com/s.js";document.body.appendChild(e);}if(window.attachEvent){window.attachEvent("onload",ls);}else{window.addEventListener("load",ls,false);}})();</script></head><body><p>yield-siftscience test page</p></body></html>');
   });
 
   app.post('/siftscience', bodyParser.json(), siftscience.webhook.express());
