@@ -2,3 +2,4 @@ node_modules
 npm-debug.log
 test/config.js
 test/node_modules
+.idea

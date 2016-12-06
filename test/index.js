@@ -2,12 +2,16 @@ var config      = require('./config.js');
 var express     = require('express');
 var bodyParser  = require('body-parser');
 
+//In v204 of API return_action is deprecated in favor of return_score, return_workflow_status & abuse_types
 var siftscience = require('../lib/app.js')({
   api_key:       config.api_key,
   account_id:    config.account_id,
   partner_id:    config.account_id,
   custom_events: ['custom_event_1', 'custom_event_2'],
-  return_action: true,
+  // return_action: true,
+  return_score: true,
+  return_workflow_status: true,
+  abuse_types: ['payment_abuse', 'promo_abuse'],
   webhooks: {
     all: function(req, res, done) {
       console.log('all: ', req.body, '\n');

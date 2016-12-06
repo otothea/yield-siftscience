@@ -45,8 +45,13 @@ var siftscience = require('yield-siftscience')({
   - **partner_id:** *optional* (required for [partner api](#partner-api), [get your partner id](https://siftscience.com/console/account/profile))
   - **custom_events:** *optional*  (ex: `['referral_code_redeemed', 'contacted_customer_support', ...]`)
   - **global_callback:** *optional* (ex: `function(err, response) { ... }` - can be used to override promise and make regular callback on all requests)
-  - **return_action:** *optional* (default: `false` - can be used to get extra params from sift science responses [more info](https://siftscience.com/resources/tutorials/formulas#add-actions))
+  - **return_action:** *DEPRECATED optional* (default: `false` - can be used to get extra params from sift science responses [more info](https://siftscience.com/resources/tutorials/formulas#add-actions))
+  - **abuse_types:** *optional* (default: `[]` - specify an array of sift science products. This parameter restricts the list of score or workflow decision retrieved to the specific products requested. [more info](https://siftscience.com/developers/docs/curl/decisions-api/decision-status). Possible values: Array with one or more of - `['payment_abuse','promo_abuse','content_abuse','account_abuse','legacy']`)
+  - **return_score:** *optional* (default: `false` - can be used to return score from sift science synchronously [more info](https://siftscience.com/developers/docs/curl/score-api/synchronous-scores))
+  - **return_workflow_status:** *optional* (default: `false` - can be used to return workflow status from sift science synchronously [more info](https://siftscience.com/developers/docs/curl/workflows-api/workflow-decisions))
   - **webhooks:** *optional* (default: `{}` - see [webhooks](#webhooks) for usage)
+
+**Note:** In v204 of the sift science API, return_action is deprecated in favor of the more granular combined use of abuse_types, return_score and return_workflow_status flags. [more info](https://siftscience.com/resources/tutorials/formulas)
 
 ## EVENTS API
 
