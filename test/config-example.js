@@ -3,5 +3,6 @@ module.exports = {
   account_id: 'xxxxxxxx',
   js_key:     'xxxxxxxx',
   host:       'localhost',
-  port:       3000
+  port:       3000,
+  verbose:    false
 };

@@ -19,6 +19,10 @@
     "url": "https://github.com/otothea/yield-siftscience"
   },
   "main": "./lib/app.js",
+  "devDependencies": {
+    "body-parser": "1.14.2",
+    "express": "4.13.3"
+  },
   "dependencies": {
     "q": "1.4.1",
     "request": "2.67.0",
