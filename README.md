@@ -151,7 +151,7 @@ var result = yield siftscience.unlabel(user.id);
 #### Get decision status:
 
 ```js
-var result = yield siftsciend.decision.status('users', entity.id)
+var result = yield siftscience.decision.status(siftscience.CONSTANTS.ENTITY_TYPE.USERS, entity.id)
 ```
 
 ## WORKFLOW API
@@ -161,7 +161,7 @@ var result = yield siftsciend.decision.status('users', entity.id)
 #### Get workflow status:
 
 ```js
-var result = yield siftsciend.workflow.status(workflow.id)
+var result = yield siftscience.workflow.status(workflow.id)
 ```
 
 ## SCORE API
@@ -393,7 +393,8 @@ siftscience.CONSTANTS = {
     '57':  'Invalid HTTP body',
     '60':  'Rate limited',
     '104': 'Invalid API version',
-    '105': 'Not a valid reserved field'
+    '105': 'Not a valid reserved field',
+    '111': 'This feature is not enabled in your feature plan.'
   },
   REASON: {
     CHARGEBACK:        '$chargeback',
@@ -426,8 +427,10 @@ siftscience.CONSTANTS = {
     FAILED:   'failed'
   },
   ENTITY_TYPE: {
-    USER:  'user',
-    ORDER: 'order'
+    USERS:  'users',
+    ORDERS: 'orders',
+    USER:   'user',
+    ORDER:  'order'
   },
   APP: {
     DECISION:        'decision',

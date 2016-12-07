@@ -67,12 +67,12 @@ function create_account() {
     '$phone':      '123-456-7890'
   })
   .then(function(response) {
-    console.log('CREATE ACCOUNT: ', siftscience.CONSTANTS.RESPONSE_STATUS_MESSAGE[response.status]);
+    console.log('CREATE ACCOUNT:', siftscience.CONSTANTS.RESPONSE_STATUS_MESSAGE[response.status]);
     if (config.verbose)
       console.log('\n', response, '\n');
   })
   .catch(function(err) {
-    console.error('CREATE ACCOUNT ERROR: ', err);
+    console.error('CREATE ACCOUNT ERROR:', err);
   });
 }
 
@@ -85,12 +85,12 @@ function update_account() {
     '$phone':      '123-456-7890'
   })
   .then(function(response) {
-    console.log('UPDATE ACCOUNT: ', siftscience.CONSTANTS.RESPONSE_STATUS_MESSAGE[response.status]);
+    console.log('UPDATE ACCOUNT:', siftscience.CONSTANTS.RESPONSE_STATUS_MESSAGE[response.status]);
     if (config.verbose)
       console.log('\n', response, '\n');
   })
   .catch(function(err) {
-    console.error('UPDATE ACCOUNT ERROR: ', err);
+    console.error('UPDATE ACCOUNT ERROR:', err);
   });
 }
 
@@ -101,12 +101,12 @@ function login() {
     '$login_status': siftscience.CONSTANTS.STATUS.SUCCESS
   })
   .then(function(response) {
-    console.log('LOGIN: ', siftscience.CONSTANTS.RESPONSE_STATUS_MESSAGE[response.status]);
+    console.log('LOGIN:', siftscience.CONSTANTS.RESPONSE_STATUS_MESSAGE[response.status]);
     if (config.verbose)
       console.log('\n', response, '\n');
   })
   .catch(function(err) {
-    console.error('LOGIN ERROR: ', err);
+    console.error('LOGIN ERROR:', err);
   });
 }
 
@@ -118,40 +118,40 @@ function custom_event_1() {
     'custom_2':    'custom 2'
   })
   .then(function(response) {
-    console.log('CUSTOM EVENT 1: ', siftscience.CONSTANTS.RESPONSE_STATUS_MESSAGE[response.status]);
+    console.log('CUSTOM EVENT 1:', siftscience.CONSTANTS.RESPONSE_STATUS_MESSAGE[response.status]);
     if (config.verbose)
       console.log('\n', response, '\n');
   })
   .catch(function(err) {
-    console.error('CUSTOM EVENT 1 ERROR: ', err);
+    console.error('CUSTOM EVENT 1 ERROR:', err);
   });
 }
 
 function label() {
   return siftscience.label(user_id, {
     '$description': 'Spamming and fraud',
-    '$abuse_type':  siftscience.CONSTANTS.ABUSE_TYPE.ACCOUNT_ABUSE,
+    '$abuse_type':  siftscience.CONSTANTS.ABUSE_TYPE.LEGACY,
     '$is_bad':      true
   })
   .then(function(response) {
-    console.log('LABEL: ', siftscience.CONSTANTS.RESPONSE_STATUS_MESSAGE[response.status]);
+    console.log('LABEL:', siftscience.CONSTANTS.RESPONSE_STATUS_MESSAGE[response.status]);
     if (config.verbose)
       console.log('\n', response, '\n');
   })
   .catch(function(err) {
-    console.error('LABEL ERROR: ', err);
+    console.error('LABEL ERROR:', err);
   });
 }
 
 function unlabel() {
-  return siftscience.unlabel(user_id, siftscience.CONSTANTS.ABUSE_TYPE.ACCOUNT_ABUSE)
+  return siftscience.unlabel(user_id, siftscience.CONSTANTS.ABUSE_TYPE.LEGACY)
   .then(function(response) {
-    console.log('UNLABEL: ', siftscience.CONSTANTS.RESPONSE_STATUS_MESSAGE[response.status]);
+    console.log('UNLABEL:', siftscience.CONSTANTS.RESPONSE_STATUS_MESSAGE[response.status]);
     if (config.verbose)
       console.log('\n', response, '\n');
   })
   .catch(function(err) {
-    console.error('UNLABEL ERROR: ', err);
+    console.error('UNLABEL ERROR:', err);
   });
 }
 
@@ -165,7 +165,7 @@ function decision_status() {
       console.log('\n', response, '\n');
   })
   .catch(function(err) {
-    console.error('DECISION STATUS ERROR: ', err);
+    console.error('DECISION STATUS ERROR:', err);
   });
 }
 
@@ -179,19 +179,19 @@ function workflow_status() {
       console.log('\n', response, '\n');
   })
   .catch(function(err) {
-    console.error('WORKFLOW STATUS ERROR: ', err);
+    console.error('WORKFLOW STATUS ERROR:', err);
   });
 }
 
 function score() {
   return siftscience.score(user_id)
   .then(function(response) {
-    console.log('SCORE: ', siftscience.CONSTANTS.RESPONSE_STATUS_MESSAGE[response.status]);
+    console.log('SCORE:', siftscience.CONSTANTS.RESPONSE_STATUS_MESSAGE[response.status]);
     if (config.verbose)
       console.log('\n', response, '\n');
   })
   .catch(function(err) {
-    console.error('SCORE ERROR: ', err);
+    console.error('SCORE ERROR:', err);
   });
 }
 
@@ -205,7 +205,7 @@ function fingerprint_get_devices() {
       console.log('\n', response, '\n');
   })
   .catch(function(err) {
-    console.error('GET DEVICES ERROR: ', err);
+    console.error('GET DEVICES ERROR:', err);
   });
 }
 
@@ -220,7 +220,7 @@ function fingerprint_get_session() {
     return response;
   })
   .catch(function(err) {
-    console.error('SESSION ERROR: ', err);
+    console.error('SESSION ERROR:', err);
   });
 }
 
@@ -235,7 +235,7 @@ function fingerprint_get_device(_response) {
     return response;
   })
   .catch(function(err) {
-    console.error('GET DEVICE ERROR: ', err);
+    console.error('GET DEVICE ERROR:', err);
   });
 }
 
@@ -259,7 +259,7 @@ function fingerprint_label_device(_response) {
       console.log('\n', response, '\n');
   })
   .catch(function(err) {
-    console.error('LABEL DEVICE ERROR: ', err);
+    console.error('LABEL DEVICE ERROR:', err);
   });
 }
 
@@ -278,7 +278,7 @@ function partner_create_account() {
       console.log('\n', response, '\n');
   })
   .catch(function(err) {
-    console.error('CREATE PARTNER ACCOUNT ERROR: ', err);
+    console.error('CREATE PARTNER ACCOUNT ERROR:', err);
   });
 }
 
@@ -292,7 +292,7 @@ function partner_list_accounts() {
       console.log('\n', response, '\n');
   })
   .catch(function(err) {
-    console.error('LIST PARTNER ACCOUNTS ERROR: ', err);
+    console.error('LIST PARTNER ACCOUNTS ERROR:', err);
   });
 }
 
@@ -310,7 +310,7 @@ function partner_configure_notifications() {
       console.log('\n', response, '\n');
   })
   .catch(function(err) {
-    console.error('CONFIGURE NOTIFICATIONS ERROR: ', err);
+    console.error('CONFIGURE NOTIFICATIONS ERROR:', err);
   });
 }
 
