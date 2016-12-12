@@ -10,6 +10,8 @@ Also supports regular [callbacks](#callbacks).
   - [Usage](#usage)
   - [Events API](#events-api)
   - [Labels API](#labels-api)
+  - [Decision API](#decision-api)
+  - [Workflow API](#workflow-api)
   - [Score API](#score-api)
   - [Device Fingerprinting API](#device-fingerprinting-api)
   - [Partner API](#partner-api)
@@ -40,22 +42,22 @@ var siftscience = require('yield-siftscience')({
 
 #### Available Options:
 
-  - **api_key:** *required* [get your api key](https://siftscience.com/console/developer/api-keys)
-  - **account_id:** *optional* (required for [device fingerprinting api](#device-fingerprinting-api), [get your account id](https://siftscience.com/console/account/profile))
-  - **partner_id:** *optional* (required for [partner api](#partner-api), [get your partner id](https://siftscience.com/console/account/profile))
-  - **custom_events:** *optional*  (ex: `['referral_code_redeemed', 'contacted_customer_support', ...]`)
-  - **global_callback:** *optional* (ex: `function(err, response) { ... }` - can be used to override promise and make regular callback on all requests)
-  - **return_action:** *DEPRECATED optional* (default: `false` - can be used to get extra params from sift science responses [more info](https://siftscience.com/resources/tutorials/formulas#add-actions))
-  - **abuse_types:** *optional* (default: `[]` - specify an array of sift science products. This parameter restricts the list of score or workflow decision retrieved to the specific products requested. [more info](https://siftscience.com/developers/docs/curl/decisions-api/decision-status). Possible values: Array with one or more of - `['payment_abuse','promo_abuse','content_abuse','account_abuse','legacy']`)
-  - **return_score:** *optional* (default: `false` - can be used to return score from sift science synchronously [more info](https://siftscience.com/developers/docs/curl/score-api/synchronous-scores))
-  - **return_workflow_status:** *optional* (default: `false` - can be used to return workflow status from sift science synchronously [more info](https://siftscience.com/developers/docs/curl/workflows-api/workflow-decisions))
-  - **webhooks:** *optional* (default: `{}` - see [webhooks](#webhooks) for usage)
+  - {string} **api_key** ([get your api key](https://siftscience.com/console/developer/api-keys))
+  - {string} **[account_id]** (required for [device fingerprinting api](#device-fingerprinting-api), [get your account id](https://siftscience.com/console/account/profile))
+  - {string} **[partner_id]** (required for [partner api](#partner-api), [get your partner id](https://siftscience.com/console/account/profile))
+  - {string[]} **[custom_events]** (ex: `['referral_code_redeemed', 'contacted_customer_support', ...]`)
+  - {function} **[global_callback]** (ex: `function(err, response) { ... }` - can be used to override promise and make regular callback on all requests)
+  - {string[]} **[abuse_types]** (default: `[]` - specify an array of sift science products. This parameter restricts the list of score or workflow decision retrieved to the specific products requested. [more info](https://siftscience.com/developers/docs/curl/decisions-api/decision-status). Possible values: Array with one or more of - `['payment_abuse','promo_abuse','content_abuse','account_abuse','legacy']`)
+  - {boolean} **[return_score]** (default: `false` - can be used to return score from sift science synchronously [more info](https://siftscience.com/developers/docs/curl/score-api/synchronous-scores))
+  - {boolean} **[return_workflow_status]** (default: `false` - can be used to return workflow status from sift science synchronously [more info](https://siftscience.com/developers/docs/curl/workflows-api/workflow-decisions))
+  - {object} **[webhooks]** (default: `{}` - see [webhooks](#webhooks) for usage)
+  - {boolean} **[return_action]** *DEPRECATED* (default: `false` - can be used to get extra params from sift science responses [more info](https://siftscience.com/resources/tutorials/formulas#add-actions))
 
 **Note:** In v204 of the sift science API, return_action is deprecated in favor of the more granular combined use of abuse_types, return_score and return_workflow_status flags. [more info](https://siftscience.com/resources/tutorials/formulas)
 
 ## EVENTS API
 
-[https://siftscience.com/resources/references/events-api](https://siftscience.com/resources/references/events-api)
+[https://siftscience.com/developers/docs/curl/events-api](https://siftscience.com/developers/docs/curl/events-api)
 
 #### Send Event:
 
@@ -122,15 +124,17 @@ var result = yield siftscience.event.contacted_customer_support({
 
 ## LABELS API
 
-[https://siftscience.com/resources/references/labels-api](https://siftscience.com/resources/references/labels-api)
+[https://siftscience.com/developers/docs/curl/labels-api](https://siftscience.com/developers/docs/curl/labels-api)
 
 #### Send Label:
 
 ```js
 var result = yield siftscience.label(user.id, {
   '$is_bad':      true,
-  '$reasons':     [siftscience.CONSTANTS.REASON.SPAM, siftscience.CONSTANTS.REASON.CHARGEBACK],
-  '$description': 'Because they are spamming and abusing our system'
+  '$abuse_type':  siftscience.CONSTANTS.ABUSE_TYPE.PAYMENT_ABUSE,
+  '$description': 'Because they are spamming and abusing our system',
+  '$source':      'manual review',
+  '$analyst':     'admin@example.com'
 });
 ```
 
@@ -140,9 +144,29 @@ var result = yield siftscience.label(user.id, {
 var result = yield siftscience.unlabel(user.id);
 ```
 
+## DECISION API
+
+[https://siftscience.com/developers/docs/curl/decisions-api](https://siftscience.com/developers/docs/curl/decisions-api)
+
+#### Get decision status:
+
+```js
+var result = yield siftscience.decision.status(siftscience.CONSTANTS.ENTITY_TYPE.USERS, entity.id)
+```
+
+## WORKFLOW API
+
+[https://siftscience.com/developers/docs/curl/workflows-api](https://siftscience.com/developers/docs/curl/workflows-api)
+
+#### Get workflow status:
+
+```js
+var result = yield siftscience.workflow.status(workflow.id)
+```
+
 ## SCORE API
 
-[https://siftscience.com/resources/references/score-api](https://siftscience.com/resources/references/score-api)
+[https://siftscience.com/developers/docs/curl/score-api](https://siftscience.com/developers/docs/curl/score-apii)
 
 #### Get Score:
 
@@ -152,32 +176,32 @@ var result = yield siftscience.score(user.id);
 
 ## DEVICE FINGERPRINTING API
 
-[https://siftscience.com/resources/references/device-fingerprinting](https://siftscience.com/resources/references/device-fingerprinting)
+[https://siftscience.com/developers/docs/curl/device-fingerprinting-api](https://siftscience.com/developers/docs/curl/device-fingerprinting-api)
 
 #### JavaScript Snippet:
+
+[https://siftscience.com/developers/docs/javascript/javascript-api](https://siftscience.com/developers/docs/javascript/javascript-api)
 
 Install the following JavaScript snippet on every public-facing page on your site. Do not include this snippet on internal tools or administration systems.
 
 Replace `'UNIQUE_SESSION_ID'`, `'UNIQUE_USER_ID'`, and `'INSERT_JS_SNIPPET_KEY_HERE'` with proper values
 
-```js
+```html
 <script type="text/javascript">
-  var _session_id = 'UNIQUE_SESSION_ID';
   var _user_id = 'UNIQUE_USER_ID';
+  var _session_id = 'UNIQUE_SESSION_ID';
 
-  var _sift = _sift || [];
+  var _sift = window._sift = window._sift || [];
   _sift.push(['_setAccount', 'INSERT_JS_SNIPPET_KEY_HERE']);
-  _sift.push(['_setSessionId', _session_id]);
   _sift.push(['_setUserId', _user_id]);
+  _sift.push(['_setSessionId', _session_id]);
   _sift.push(['_trackPageview']);
+
   (function() {
     function ls() {
       var e = document.createElement('script');
-      e.type = 'text/javascript';
-      e.async = true;
-      e.src = ('https:' == document.location.protocol ? 'https://' : 'http://') + 'cdn.siftscience.com/s.js';
-      var s = document.getElementsByTagName('script')[0];
-      s.parentNode.insertBefore(e, s);
+      e.src = 'https://cdn.siftscience.com/s.js';
+      document.body.appendChild(e);
     }
     if (window.attachEvent) {
       window.attachEvent('onload', ls);
@@ -196,7 +220,7 @@ An Account ID is required to use the fingerprint api. [Get your Account ID](http
 var siftscience = require('yield-siftscience')({
   api_key:    'YOUR_SIFT_SCIENCE_REST_API_KEY',
   account_id: 'YOUR_SIFT_SCIENCE_ACCOUNT_ID'
-})
+});
 ```
 
 #### Get Session:
@@ -225,7 +249,7 @@ var result = yield siftscience.fingerprint.get_devices(user.id);
 
 ## PARTNER API
 
-[https://siftscience.com/resources/references/partner-api](https://siftscience.com/resources/references/partner-api)
+[https://siftscience.com/developers/docs/curl/partner-api](https://siftscience.com/developers/docs/curl/partner-api)
 
 **NOTE:** I have not tested these as I do not have a partner account with sift science. Please report any bugs.
 
@@ -238,7 +262,7 @@ var siftscience = require('yield-siftscience')({
   api_key:    'YOUR_SIFT_SCIENCE_REST_API_KEY',
   account_id: 'YOUR_SIFT_SCIENCE_ACCOUNT_ID',
   partner_id: 'YOUR_SIFT_SCIENCE_PARTNER_ID'
-})
+});
 ```
 
 #### Create Account:
@@ -324,6 +348,12 @@ siftscience.CONSTANTS = {
     FAILURE: '$failure',
     PENDING: '$pending'
   },
+  FAILURE_REASON: {
+    ALREADY_USED:   '$already_used',
+    INVALID_CODE:   '$invalid_code',
+    NOT_APPLICABLE: '$not_applicable',
+    EXPIRED:        '$expired'
+  },
   SOCIAL_SIGN_ON_TYPE: {
     FACEBOOK: '$facebook',
     GOOGLE:   '$google',
@@ -332,33 +362,39 @@ siftscience.CONSTANTS = {
     OTHER:    '$other'
   },
   PAYMENT_TYPE: {
-    CREDIT_CARD:              '$credit_card',
-    ELECTRONIC_FUND_TRANSFER: '$electronic_fund_transfer',
-    CRYPTO_CURRENCY:          '$crypto_currency',
     CASH:                     '$cash',
-    STORE_CREDIT:             '$store_credit',
-    GIFT_CARD:                '$gift_card',
-    POINTS:                   '$points',
-    FINANCING:                '$financing',
     CHECK:                    '$check',
-    MONEY_ORDER:              '$money_order',
-    VOUCHER:                  '$voucher',
+    CREDIT_CARD:              '$credit_card',
+    CRYPTO_CURRENCY:          '$crypto_currency',
+    ELECTRONIC_FUND_TRANSFER: '$electronic_fund_transfer',
+    FINANCING:                '$financing',
+    GIFT_CARD:                '$gift_card',
     INTERAC:                  '$interac',
+    INVOICE:                  '$invoice',
+    MONEY_ORDER:              '$money_order',
     MASTERPASS:               '$masterpass',
-    THIRD_PARTY_PROCESSOR:    '$third_party_processor'
+    POINTS:                   '$points',
+    STORE_CREDIT:             '$store_credit',
+    THIRD_PARTY_PROCESSOR:    '$third_party_processor',
+    VOUCHER:                  '$voucher'
   },
   RESPONSE_STATUS_MESSAGE: {
-    0:   'Success',
-    51:  'Invalid API key',
-    52:  'Invalid characters in field name',
-    53:  'Invalid characters in field value',
-    54:  'Specified user_id has no scoreable events',
-    55:  'Missing required field',
-    56:  'Invalid JSON in request',
-    57:  'Invalid HTTP body',
-    60:  'Rate limited; too many events have been received in a short period of time',
-    104: 'Invalid API version',
-    105: 'Not a valid reserved field'
+    '-4':  'Service currently unavailable.Please try again later.',
+    '-3':  'Server-side timeout processing request. Please try again later.',
+    '-2':  'Unexpected server-side error',
+    '-1':  'Unexpected server-side error',
+    '0':   'Success',
+    '51':  'Invalid API key',
+    '52':  'Invalid characters in field name',
+    '53':  'Invalid characters in field value',
+    '54':  'Specified user_id has no scoreable events',
+    '55':  'Missing required field',
+    '56':  'Invalid JSON in request',
+    '57':  'Invalid HTTP body',
+    '60':  'Rate limited',
+    '104': 'Invalid API version',
+    '105': 'Not a valid reserved field',
+    '111': 'This feature is not enabled in your feature plan.'
   },
   REASON: {
     CHARGEBACK:        '$chargeback',
@@ -371,6 +407,37 @@ siftscience.CONSTANTS = {
   DEVICE_LABEL: {
     BAD:     'bad',
     NOT_BAD: 'not_bad'
+  },
+  ABUSE_TYPE: {
+    PAYMENT_ABUSE:   'payment_abuse',
+    CONTENT_ABUSE:   'content_abuse',
+    PROMOTION_ABUSE: 'promotion_abuse',
+    ACCOUNT_ABUSE:   'account_abuse'
+  },
+  DECISION: {
+    PAYMENT_ABUSE: 'payment_abuse',
+    PROMO_ABUSE:   'promo_abuse',
+    CONTENT_ABUSE: 'content_abuse',
+    ACCOUNT_ABUSE: 'account_abuse',
+    LEGACY:        'legacy'
+  },
+  STATE: {
+    RUNNING:  'running',
+    FINISHED: 'finished',
+    FAILED:   'failed'
+  },
+  ENTITY_TYPE: {
+    USERS:  'users',
+    ORDERS: 'orders',
+    USER:   'user',
+    ORDER:  'order'
+  },
+  APP: {
+    DECISION:        'decision',
+    REVIEW_QUEUE:    'review_queue',
+    USER_SCORER:     'user_scorer',
+    ORDER_SCORER:    'order_scorer',
+    EVENT_PROCESSOR: 'event_processor'
   }
 };
 ```
@@ -421,7 +488,7 @@ app.listen(config.port);
 
 ## SIFT SCIENCE DOCUMENTATION
 
-[siftscience.com/docs](https://siftscience.com/docs)
+[https://siftscience.com/developers/docs/curl/apis-overview](https://siftscience.com/developers/docs/curl/apis-overview)
 
 ## TESTING
 
@@ -432,24 +499,23 @@ $ cp test/config-example.js test/config.js
 $ nano test/config.js
 ```
 
-#### Set Sandbox [API Key](https://siftscience.com/console/developer/api-keys), [JS Key](https://siftscience.com/console/developer/api-keys), and [Account ID](https://siftscience.com/console/account/profile)
+#### Set Sandbox [API Key](https://siftscience.com/console/developer/api-keys), [JS Key](https://siftscience.com/console/developer/api-keys), [Account ID](https://siftscience.com/console/account/profile), [Workflow Run ID](https://siftscience.com/console/developer/workflow-logs)
 
 ```js
 module.exports = {
-  api_key:    'xxxxxxxxxxxxxxxx',
-  account_id: 'xxxxxxxxxxxxxxxxxxxxxxxx',
-  js_key:     'xxxxxxxxxx',
-  host:       'localhost',
-  port:       3000
+  api_key:         'xxxxxxxxxxxxxxxx',
+  js_key:          'xxxxxxxxxx',
+  account_id:      'xxxxxxxxxxxxxxxxxxxxxxxx',
+  workflow_run_id: 'xxxxxxxxxxxxx',
+  host:            'localhost',
+  port:            3000
 };
 ```
 
 #### Install Dependencies:
 
 ```bash
-$ cd test
 $ npm install
-$ cd ..
 ```
 
 #### Run Test:
@@ -469,6 +535,14 @@ http://localhost:3000
 **NOTE:** You will have to run the test a second time if this is your first time visiting the test web page
 
 ## CHANGE LOG
+
+#### 0.2.0:
+
+  - Update to API v204
+  - **BREAKING CHANGE:** `siftscience.unlabel()` function signature has changed to support abuse type
+  - **BREAKING CHANGE:** `siftscience.score()` function signature has changed to support abuse types
+  - Add support for decision status api
+  - Add support for workflow status api
 
 #### 0.1.2:
 
