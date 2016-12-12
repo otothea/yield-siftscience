@@ -499,15 +499,16 @@ $ cp test/config-example.js test/config.js
 $ nano test/config.js
 ```
 
-#### Set Sandbox [API Key](https://siftscience.com/console/developer/api-keys), [JS Key](https://siftscience.com/console/developer/api-keys), and [Account ID](https://siftscience.com/console/account/profile)
+#### Set Sandbox [API Key](https://siftscience.com/console/developer/api-keys), [JS Key](https://siftscience.com/console/developer/api-keys), [Account ID](https://siftscience.com/console/account/profile), [Workflow Run ID](https://siftscience.com/console/developer/workflow-logs)
 
 ```js
 module.exports = {
-  api_key:    'xxxxxxxxxxxxxxxx',
-  account_id: 'xxxxxxxxxxxxxxxxxxxxxxxx',
-  js_key:     'xxxxxxxxxx',
-  host:       'localhost',
-  port:       3000
+  api_key:         'xxxxxxxxxxxxxxxx',
+  js_key:          'xxxxxxxxxx',
+  account_id:      'xxxxxxxxxxxxxxxxxxxxxxxx',
+  workflow_run_id: 'xxxxxxxxxxxxx',
+  host:            'localhost',
+  port:            3000
 };
 ```
 

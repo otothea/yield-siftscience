@@ -32,8 +32,7 @@ var siftscience = require('../lib/app.js')({
 //
 
 var session_id  = '1',
-    user_id     = '1',
-    workflow_id = '1';
+    user_id     = '1';
 
 function init() {
   create_account()
@@ -64,7 +63,7 @@ function create_account() {
     '$user_id':    user_id,
     '$user_email': 'test@email.com',
     '$name':       'Test',
-    '$phone':      '123-456-7890'
+    '$phone':      '1-234-567-8910'
   })
   .then(function(response) {
     console.log('CREATE ACCOUNT:', siftscience.CONSTANTS.RESPONSE_STATUS_MESSAGE[response.status]);
@@ -82,7 +81,7 @@ function update_account() {
     '$user_id':    user_id,
     '$user_email': 'test@email.com',
     '$name':       'Test',
-    '$phone':      '123-456-7890'
+    '$phone':      '1-234-567-8910'
   })
   .then(function(response) {
     console.log('UPDATE ACCOUNT:', siftscience.CONSTANTS.RESPONSE_STATUS_MESSAGE[response.status]);
@@ -146,7 +145,7 @@ function label() {
 function unlabel() {
   return siftscience.unlabel(user_id, siftscience.CONSTANTS.ABUSE_TYPE.LEGACY)
   .then(function(response) {
-    console.log('UNLABEL:', siftscience.CONSTANTS.RESPONSE_STATUS_MESSAGE[response.status]);
+    console.log('UNLABEL: Success');
     if (config.verbose)
       console.log('\n', response, '\n');
   })
@@ -170,7 +169,7 @@ function decision_status() {
 }
 
 function workflow_status() {
-  return siftscience.workflow.status(workflow_id)
+  return siftscience.workflow.status(config.workflow_run_id)
   .then(function(response) {
     if (response.error)
       throw response.description;
