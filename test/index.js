@@ -41,6 +41,8 @@ function init() {
     .then(custom_event_1)
     .then(label)
     .then(unlabel)
+    .then(decision_list)
+    .then(decision_apply)
     .then(decision_status)
     .then(workflow_status)
     .then(score)
@@ -154,8 +156,42 @@ function unlabel() {
   });
 }
 
+function decision_list() {
+  return siftscience.decision.list()
+  .then(function(response) {
+    if (response.error)
+      throw response.description;
+    console.log('DECISION LIST: Success');
+    if (config.verbose)
+      console.log('\n', response, '\n');
+    return response;
+  })
+  .catch(function(err) {
+    console.error('DECISION LIST ERROR:', err);
+  });
+}
+
+function decision_apply(_response) {
+  return siftscience.decision.apply(user_id, null, {
+    decision_id: _response.data[0].id,
+    source: siftscience.CONSTANTS.DECISION_SOURCE.MANUAL_REVIEW,
+    analyst: 'analyst@test.com',
+    description: 'applied via the high priority queue, queued user because their risk score exceeded 85'
+  })
+  .then(function(response) {
+    if (response.error)
+      throw response.description;
+    console.log('DECISION APPLY: Success');
+    if (config.verbose)
+      console.log('\n', response, '\n');
+  })
+  .catch(function(err) {
+    console.error('DECISION APPLY ERROR:', err);
+  });
+}
+
 function decision_status() {
-  return siftscience.decision.status('users', user_id)
+  return siftscience.decision.status(siftscience.CONSTANTS.ENTITY_TYPE.USERS, user_id)
   .then(function(response) {
     if (response.error)
       throw response.description;

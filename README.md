@@ -154,6 +154,33 @@ var result = yield siftscience.unlabel(user.id);
 var result = yield siftscience.decision.status(siftscience.CONSTANTS.ENTITY_TYPE.USERS, entity.id)
 ```
 
+#### List decisions:
+
+```js
+var result = yield siftscience.decision.list(siftscience.CONSTANTS.ENTITY_TYPE.USER)
+```
+
+#### Apply decision to user:
+
+```js
+var result = yield siftscience.decision.apply(user.id, null, {
+  'decision_id': 'user_looks_ok_payment_abuse',
+  'source':      siftscience.CONSTANTS.DECISION_SOURCE.MANUAL_REVIEW,
+  'analyst':     'analyst@email.com',
+  'description': 'applied via the high priority queue, queued user because their risk score exceeded 85'
+})
+```
+
+#### Apply decision to order:
+
+```js
+var result = yield siftscience.decision.apply(user.id, order.id, {
+  'decision_id': 'user_looks_ok_payment_abuse',
+  'source':      siftscience.CONSTANTS.DECISION_SOURCE.AUTOMATED_RULE,
+  'description': 'Auto block pending order as score exceeded risk threshold of 90'
+})
+```
+
 ## WORKFLOW API
 
 [https://siftscience.com/developers/docs/curl/workflows-api](https://siftscience.com/developers/docs/curl/workflows-api)
@@ -535,6 +562,13 @@ http://localhost:3000
 **NOTE:** You will have to run the test a second time if this is your first time visiting the test web page
 
 ## CHANGE LOG
+
+#### 0.2.1:
+
+  - Add support for decision list api
+  - Add support for apply decision api
+  - Add many missing `CONSTANTS`
+  - Add `$verification` event
 
 #### 0.2.0:
 
