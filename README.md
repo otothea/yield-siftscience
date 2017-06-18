@@ -386,27 +386,75 @@ siftscience.CONSTANTS = {
     GOOGLE:   '$google',
     YAHOO:    '$yahoo',
     TWITTER:  '$twitter',
-    OTHER:    '$other'
+    OTHER:    '$other',
+    LINKEDIN: '$linkedin'
+  },
+  CONTENT_STATUS: {
+    DRAFT:              '$draft',
+    PENDING:            '$pending',
+    ACTIVE:             '$active',
+    PAUSED:             '$paused',
+    DELETED_BY_USER:    '$deleted_by_user',
+    DELETED_BY_COMPANY: '$deleted_by_company'
+  },
+  CHARGEBACK_STATE: {
+    RECEIVED: '$received',
+    ACCEPTED: '$accepted',
+    DISPUTED: '$disputed',
+    WON:      '$won',
+    LOST:     '$lost'
+  },
+  CHARGEBACK_REASON: {
+    FRAUD:                '$fraud',
+    DUPLICATE:            '$duplicate',
+    PRODUCT_NOT_RECEIVED: '$product_not_received',
+    PRODUCT_UNACCEPTABLE: '$product_unacceptable',
+    OTHER:                '$other'
+  },
+  ORDER_STATUS: {
+    APPROVED:  '$approved',
+    CANCELED:  '$canceled',
+    HELD:      '$held',
+    FULFILLED: '$fulfilled',
+    RETURNED:  '$returned'
+  },
+  ORDER_CANCEL_REASON: {
+    PAYMENT_RISK: '$payment_risk',
+    ABUSE:        '$abuse',
+    POLICY:       '$policy',
+    OTHER:        '$other'
+  },
+  ORDER_STATUS_SOURCE: {
+    AUTOMATED: '$automated',
+    MANUAL_REVIEW: '$manual_review'
+  },
+  VERIFICATION_TYPE: {
+    SMS:        '$sms',
+    PHONE_CALL: '$phone_call',
+    EMAIL:      '$email',
+    APP_TFA:    '$app_tfa',
+    CAPTCHA:    '$captcha'
   },
   PAYMENT_TYPE: {
     CASH:                     '$cash',
     CHECK:                    '$check',
     CREDIT_CARD:              '$credit_card',
     CRYPTO_CURRENCY:          '$crypto_currency',
+    DIGITAL_WALLET:           '$digital_wallet',
     ELECTRONIC_FUND_TRANSFER: '$electronic_fund_transfer',
     FINANCING:                '$financing',
     GIFT_CARD:                '$gift_card',
-    INTERAC:                  '$interac',
+    INTERAC:                  '$interac', // Deprecated?
     INVOICE:                  '$invoice',
     MONEY_ORDER:              '$money_order',
-    MASTERPASS:               '$masterpass',
+    MASTERPASS:               '$masterpass', // Deprecated?
     POINTS:                   '$points',
     STORE_CREDIT:             '$store_credit',
     THIRD_PARTY_PROCESSOR:    '$third_party_processor',
     VOUCHER:                  '$voucher'
   },
   RESPONSE_STATUS_MESSAGE: {
-    '-4':  'Service currently unavailable.Please try again later.',
+    '-4':  'Service currently unavailable. Please try again later.',
     '-3':  'Server-side timeout processing request. Please try again later.',
     '-2':  'Unexpected server-side error',
     '-1':  'Unexpected server-side error',
@@ -435,18 +483,36 @@ siftscience.CONSTANTS = {
     BAD:     'bad',
     NOT_BAD: 'not_bad'
   },
+  DEVICE_PERVASIVENESS: {
+    LOW:    'low',
+    MEDIUM: 'medium',
+    HIGH:   'high'
+  },
   ABUSE_TYPE: {
     PAYMENT_ABUSE:   'payment_abuse',
     CONTENT_ABUSE:   'content_abuse',
     PROMOTION_ABUSE: 'promotion_abuse',
-    ACCOUNT_ABUSE:   'account_abuse'
+    PROMO_ABUSE:     'promo_abuse',
+    ACCOUNT_ABUSE:   'account_abuse',
+    LEGACY:          'legacy'
   },
   DECISION: {
-    PAYMENT_ABUSE: 'payment_abuse',
-    PROMO_ABUSE:   'promo_abuse',
-    CONTENT_ABUSE: 'content_abuse',
-    ACCOUNT_ABUSE: 'account_abuse',
-    LEGACY:        'legacy'
+    PAYMENT_ABUSE:   'payment_abuse',
+    PROMOTION_ABUSE: 'promotion_abuse',
+    PROMO_ABUSE:     'promo_abuse',
+    CONTENT_ABUSE:   'content_abuse',
+    ACCOUNT_ABUSE:   'account_abuse',
+    LEGACY:          'legacy'
+  },
+  DECISION_CATEGORY: {
+    BLOCK:  'BLOCK',
+    WATCH:  'WATCH',
+    ACCEPT: 'ACCEPT'
+  },
+  DECISION_SOURCE: {
+    MANUAL_REVIEW:  'MANUAL_REVIEW',
+    AUTOMATED_RULE: 'AUTOMATED_RULE',
+    CHARGEBACK:     'CHARGEBACK'
   },
   STATE: {
     RUNNING:  'running',
@@ -465,6 +531,11 @@ siftscience.CONSTANTS = {
     USER_SCORER:     'user_scorer',
     ORDER_SCORER:    'order_scorer',
     EVENT_PROCESSOR: 'event_processor'
+  },
+  ACCOUNT_STATE: {
+    ACTIVE:   'ACTIVE',
+    DISABLED: 'DISABLED',
+    DELETED:  'DELETED'
   }
 };
 ```
